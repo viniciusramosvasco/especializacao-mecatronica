@@ -19,6 +19,7 @@ int LSYVal = 0;
 int RSYVal = 0;
 int RSXVal = 0;
 boolean enabled = false;
+boolean triangulo = false;
 
 //BWD---------------------------------
 unsigned long lastSend = 0;
@@ -30,9 +31,8 @@ struct rovData
 {
   int RSYVal;
   int RSXVal;
-  int motor3;
-  int relay1;
-  int relay2;
+  int LSYVal;
+  boolean triangulo;
 }data;
 
 //-------------------------------------------
@@ -76,11 +76,13 @@ void loop()
       Serial.println("disabled");
       enabled = false;
     }
+    
                       
     LSYVal = ps2x.Analog(PSS_LY);
     RSYVal = ps2x.Analog(PSS_RY);
     RSXVal = ps2x.Analog(PSS_RX);
-
+    triangulo = ps2x.Button(PSB_TRIANGLE);
+    
     motorCalc();   
  }      
 }
@@ -89,8 +91,8 @@ inline void motorCalc()
 {
     data.RSYVal = RSYVal;
     data.RSXVal = RSXVal;  
-    data.motor3 = LSYVal;
-    
+    data.LSYVal = LSYVal;
+    data.triangulo = triangulo;
     //debug
     /*
     Serial.println(data.motor1);
