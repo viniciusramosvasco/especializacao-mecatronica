@@ -1,0 +1,1238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" xml:lang="en-gb" lang="en-gb"><head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-language" content="en-gb">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="keywords" content="">
+<meta name="description" content="">
+
+<title>Homebuilt Rov Forum • View topic - PS2 Control of Brushless Motor and ESC via Arduino</title>
+
+
+
+<link rel="stylesheet" href="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/stylesheet.css" type="text/css">
+
+<script type="text/javascript">
+// <![CDATA[
+
+
+function popup(url, width, height, name)
+{
+	if (!name)
+	{
+		name = '_popup';
+	}
+
+	window.open(url.replace(/&amp;/g, '&'), name, 'height=' + height + ',resizable=yes,scrollbars=yes,width=' + width);
+	return false;
+}
+
+function jumpto()
+{
+	var page = prompt('Enter the page number you wish to go to:', '1');
+	var per_page = '10';
+	var base_url = './viewtopic.php?f=15&amp;t=831';
+
+	if (page !== null && !isNaN(page) && page == Math.floor(page) && page > 0)
+	{
+		if (base_url.indexOf('?') == -1)
+		{
+			document.location.href = base_url + '?start=' + ((page - 1) * per_page);
+		}
+		else
+		{
+			document.location.href = base_url.replace(/&amp;/g, '&') + '&start=' + ((page - 1) * per_page);
+		}
+	}
+}
+
+/**
+* Find a member
+*/
+function find_username(url)
+{
+	popup(url, 760, 570, '_usersearch');
+	return false;
+}
+
+/**
+* Mark/unmark checklist
+* id = ID of parent container, name = name prefix, state = state [true/false]
+*/
+function marklist(id, name, state)
+{
+	var parent = document.getElementById(id);
+	if (!parent)
+	{
+		eval('parent = document.' + id);
+	}
+
+	if (!parent)
+	{
+		return;
+	}
+
+	var rb = parent.getElementsByTagName('input');
+	
+	for (var r = 0; r < rb.length; r++)
+	{
+		if (rb[r].name.substr(0, name.length) == name)
+		{
+			rb[r].checked = state;
+		}
+	}
+}
+
+
+
+// ]]>
+</script>
+
+
+<script type="text/javascript">
+// <![CDATA[
+	/**
+	* Resize too large images
+	*/
+	var reimg_maxWidth = 640, reimg_maxHeight = 480, reimg_relWidth = 0;
+	var reimg_swapPortrait = true;
+	var reimg_loadingImg = "./images/spacer.gif";
+	var reimg_loadingStyle = "width: 16px; height: 16px; background: url(./styles/subsilver2/imageset/icon_reimg_loading.gif) top left no-repeat; filter: Alpha(Opacity=45); opacity: .45;";
+	var reimg_loadingAlt = "Loading...";
+	
+	var reimg_autoLink = true;
+	
+	var reimg_zoomImg = "./images/spacer.gif";
+	var reimg_zoomStyle = "width: 18px; height: 15px; background: url(./styles/subsilver2/imageset/icon_reimg_zoom_in.gif) top left no-repeat; filter: Alpha(Opacity=45); opacity: .45;";
+	var reimg_zoomHover = "filter: Alpha(Opacity=90); opacity: .90;";
+	
+	var reimg_zoomAlt = "Zoom in (real dimensions: %1$d x %2$d)";
+	var reimg_zoomTarget = "_litebox";
+	var reimg_ajax_url = "http://www.homebuiltrovs.com/rovforum/reimg/reimg_ajax.php";
+
+	function reimg(img, width, height)
+	{
+		if (window.reimg_version)
+		{
+			reimg_resize(img, width, height);
+		}
+	}
+// ]]>
+</script>
+
+<script type="text/javascript" src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/reimg.js"></script><style type="text/css" media="screen, projection"><!--
+.reimg { width: 1px; height: 1px; visibility: hidden; }
+.reimg-width { width: 640px; height: auto; vertical-align: top; }
+.reimg-width-portrait { width: auto; height: 640px; }
+.reimg-height { width: auto; height: 480px; }
+.reimg-height-portrait { width: 480px; height: auto; }
+.reimg-link { cursor: pointer !important; }
+span.reimg-zoom { position: absolute; margin: 1px; }
+img.reimg-zoom { border: none !important; cursor: pointer !important; width: 18px; height: 15px; background: url(./styles/subsilver2/imageset/icon_reimg_zoom_in.gif) top left no-repeat; filter: Alpha(Opacity=45); opacity: .45; }
+img.reimg-zoom:hover { filter: Alpha(Opacity=90); opacity: .90; }
+.reimg-loading { border: none !important; width: 16px; height: 16px; background: url(./styles/subsilver2/imageset/icon_reimg_loading.gif) top left no-repeat; filter: Alpha(Opacity=45); opacity: .45; }
+--></style>
+
+	
+<style type="text/css" media="screen, projection">
+<!--
+	
+	.tablebg .tablebg .postbody .reimg-zoom { display: none; }
+	
+-->
+</style>
+	
+<script type="text/javascript">
+// <![CDATA[
+	/**
+	* Light box for resized images
+	*/
+	
+	var litebox_alt = "Zoom out";
+		
+	var litebox_zoomImg = reimg_zoomImg;
+	var litebox_zoomStyle = reimg_zoomStyle;
+	var litebox_zoomHover = reimg_zoomHover;
+	var litebox_zoomAlt = reimg_zoomAlt;
+			
+	var litebox_style = "cursor: pointer;"
+		
+	var litebox_closeImg = "./images/spacer.gif";
+	var litebox_closeStyle = "width: 18px; height: 15px; background: url(./styles/subsilver2/imageset/icon_reimg_zoom_out.gif) top left no-repeat; filter: Alpha(Opacity=45); opacity: .45;";
+	var litebox_closeHover = reimg_zoomHover;
+	var litebox_closeAlt = "Zoom out";
+		
+	var litebox_rtl = false;
+	
+// ]]>
+</script>
+
+	
+<script type="text/javascript" src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/litebox.js"></script><style type="text/css" media="screen, projection"><!--
+.litebox-background { position: absolute; top: 0; left: 0; z-index: 98; background-color: black; filter: Alpha(Opacity=80); opacity: .80; }
+span.litebox-image { position: fixed; z-index: 99; }
+div.litebox-image { position: relative; border: 4px solid white; background-color: white; margin: 24px; }
+img.litebox-image { border: none;  cursor: pointer; }
+span.litebox-zoom { position: absolute; margin: 1px; }
+img.litebox-zoom { margin-right: 1px; border: none !important; cursor: pointer !important; width: 18px; height: 15px; background: url(./styles/subsilver2/imageset/icon_reimg_zoom_in.gif) top left no-repeat; filter: Alpha(Opacity=45); opacity: .45; }
+img.litebox-zoom:hover { filter: Alpha(Opacity=90); opacity: .90; }
+img.litebox-close { border: none !important; cursor: pointer !important; width: 18px; height: 15px; background: url(./styles/subsilver2/imageset/icon_reimg_zoom_out.gif) top left no-repeat; filter: Alpha(Opacity=45); opacity: .45; }
+img.litebox-close:hover { filter: Alpha(Opacity=90); opacity: .90; }
+--></style>
+
+	
+<script type="text/javascript">
+// <![CDATA[
+	reimg_loading('./styles/subsilver2/imageset/icon_reimg_loading.gif');
+// ]]>
+</script>
+
+
+</head>
+<body class="ltr">
+
+<a name="top"></a>
+
+<div id="wrapheader">
+
+	<div id="logodesc">
+		<table cellspacing="0" width="100%">
+		<tbody><tr>
+			<td><a href="http://www.homebuiltrovs.com/rovforum/index.php"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/site_logo.gif" alt="" title="" height="97" width="400"></a></td>
+			<td align="center" width="100%"><h1>Homebuilt Rov Forum</h1><span class="gen">Exploring the Hobby of Building your own ROV - Imagine, Create, Inspire.</span></td>
+		</tr>
+		</tbody></table>
+	</div>
+
+	<div id="menubar">
+		<table cellspacing="0" width="100%">
+		<tbody><tr>
+			<td class="genmed">
+				<a href="http://www.homebuiltrovs.com/rovforum/ucp.php?mode=logout&amp;sid=fa83905b6b20808bea8993ca6586be68"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_mini_login.gif" alt="*" height="13" width="12"> Logout [ tcholas ]</a>&nbsp; &nbsp;<a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;folder=inbox"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_mini_message.gif" alt="*" height="13" width="12"> <strong>0</strong> new messages</a>
+			</td>
+			<td class="genmed" align="right">
+				<a href="http://www.homebuiltrovs.com/rovforum/faq.php"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_mini_faq.gif" alt="*" height="13" width="12"> FAQ</a>
+				&nbsp; &nbsp;<a href="http://www.homebuiltrovs.com/rovforum/search.php"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_mini_search.gif" alt="*" height="13" width="12"> Search</a>&nbsp; &nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_mini_members.gif" alt="*" height="13" width="12"> Members</a>&nbsp; &nbsp;<a href="http://www.homebuiltrovs.com/rovforum/ucp.php"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_mini_profile.gif" alt="*" height="13" width="12"> User Control Panel</a>
+			</td>
+		</tr>
+		</tbody></table>
+	</div>
+
+	<div id="datebar">
+		<table cellspacing="0" width="100%">
+		<tbody><tr>
+			<td class="gensmall">Last visit was: May 31st, 2014, 3:08 pm</td>
+			<td class="gensmall" align="right">It is currently Jun 6th, 2014, 12:22 am<br></td>
+		</tr>
+		</tbody></table>
+	</div>
+
+</div>
+
+<div id="wrapcentre">
+
+	
+	<p class="searchbar">
+		<span style="float: left;"><a href="http://www.homebuiltrovs.com/rovforum/search.php?search_id=unanswered">View unanswered posts</a> | <a href="http://www.homebuiltrovs.com/rovforum/search.php?search_id=active_topics">View active topics</a></span>
+		
+		<span style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/search.php?search_id=unreadposts">View unread posts</a> | <a href="http://www.homebuiltrovs.com/rovforum/search.php?search_id=newposts">View new posts</a> | <a href="http://www.homebuiltrovs.com/rovforum/search.php?search_id=egosearch">View your posts</a></span>
+		
+	</p>
+	
+
+	<br style="clear: both;">
+
+	<table class="tablebg" style="margin-top: 5px;" cellpadding="0" cellspacing="1" width="100%">
+	<tbody><tr>
+		<td class="row1">
+			<p class="breadcrumbs"><a href="http://www.homebuiltrovs.com/rovforum/index.php">Board index</a> » <a href="http://www.homebuiltrovs.com/rovforum/viewforum.php?f=11">On the Bench - Pieces and Parts</a> » <a href="http://www.homebuiltrovs.com/rovforum/viewforum.php?f=15">Control Systems and Tethers</a></p>
+			<p class="datetime">All times are UTC - 3 hours [ <abbr title="Daylight Saving Time">DST</abbr> ]</p>
+		</td>
+	</tr>
+	</tbody></table>
+
+	<br>
+
+<div id="pageheader">
+	<h2><a class="titles" href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831">PS2 Control of Brushless Motor and ESC via Arduino</a></h2>
+
+
+</div>
+
+<br clear="all"><br>
+
+<div id="pagecontent">
+
+	<table cellspacing="1" width="100%">
+	<tbody><tr>
+		<td align="left" nowrap="nowrap" valign="middle">
+		<a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=post&amp;f=15"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/button_topic_new.gif" alt="Post new topic" title="Post new topic"></a>&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=reply&amp;f=15&amp;t=831"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/button_topic_reply.gif" alt="Reply to topic" title="Reply to topic"></a>
+		</td>
+		
+			<td class="nav" nowrap="nowrap" valign="middle">&nbsp;Page <strong>1</strong> of <strong>2</strong><br></td>
+			<td class="gensmall" nowrap="nowrap">&nbsp;[ 20 posts ]&nbsp;</td>
+			<td class="gensmall" align="right" nowrap="nowrap" width="100%"><b><a href="#" onclick="jumpto(); return false;" title="Click to jump to page…">Go to page</a> <strong>1</strong><span class="page-sep">, </span><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;start=10">2</a> &nbsp;<a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;start=10">Next</a></b></td>
+		
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr>
+		<td class="cat">
+			<table cellspacing="0" width="100%">
+			<tbody><tr>
+				<td class="nav" nowrap="nowrap">&nbsp;
+				<a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?uid=2135&amp;f=15&amp;t=831&amp;watch=topic&amp;start=0&amp;hash=db1fe9b4" title="Subscribe topic">Subscribe topic</a> | <a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;bookmark=1&amp;hash=db1fe9b4" title="Bookmark topic">Bookmark topic</a> | <a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;view=print" title="Print view">Print view</a> | <a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=email&amp;t=831" title="E-mail friend">E-mail friend</a>
+				</td>
+				<td class="nav" align="right" nowrap="nowrap"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;view=previous">Previous topic</a> | <a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;view=next">Next topic</a>&nbsp;</td>
+			</tr>
+			</tbody></table>
+		</td>
+	</tr>
+
+	</tbody></table>
+
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	
+		<tbody><tr>
+			<th>Author</th>
+			<th>Message</th>
+		</tr>
+	<tr class="row1">
+
+			<td align="center" valign="middle">
+				<a name="p4096"></a>
+				<b class="postauthor">KR2_Diving</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4096">PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4096#p4096"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Sep 28th, 2012, 4:25 pm&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				<tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/file.jpg" alt="User avatar" height="100" width="100"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 30th, 2012, 1:43 pm<br><b>Posts:</b> 251<br><b>Location:</b> Currently: NW Suburbs of Chicago. Originally: NE Wisconsin
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">Right... been struggling to post the code 
+the way i was hoping, so here is a COPY / PASTE job... Hope this works 
+better. (if anyone knows how i can post as an attachment (.txt for 
+example... let me know!)<br><br><div class="codetitle"><b>Code:</b></div><div class="codecontent"><br>/*<br>Code by: KR2_DIVING (Ryan)<br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )&nbsp; &nbsp; O<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(&nbsp; &nbsp;o . O<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )&nbsp; &nbsp;() .<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /&nbsp; O&nbsp; &nbsp;o<br>&nbsp; &nbsp; &nbsp; &nbsp;_.|._ o .()<br>&nbsp; &nbsp; &nbsp; / _:_ \<br>&nbsp; &nbsp; &nbsp;|.(_ _).|<br>&nbsp; &nbsp; &nbsp;_\. : ./_<br>&nbsp; &nbsp; / |..:..| \<br>&nbsp; &nbsp;/_/ `---' \_\ <br>&nbsp; &nbsp;\_)&nbsp; &nbsp; &nbsp; &nbsp; \_)<br>&nbsp; &nbsp; &nbsp;\&nbsp; &nbsp;T&nbsp; &nbsp;/&nbsp; &nbsp;<br>&nbsp; &nbsp; &nbsp;_)__|__(_&nbsp; &nbsp;<br>&nbsp; &nbsp; /....|....\&nbsp; <br>&nbsp; &nbsp; """"" """""&nbsp; <br>&nbsp; ---KR2_DIVING---<br><br>I don't mind if you use this code for your own use.&nbsp; I have made it freely available online.<br>However, please be sure to credit my work, and the work of Bill Porter when using or passing<br>this code on.<br><br>Please direct any questions to: kr 2 diving (at) gmail (dot) com<br><br>Version History<br>Version&nbsp; Date&nbsp; &nbsp; &nbsp; Notes&nbsp; <br>-------&nbsp; --------&nbsp; -----<br>&nbsp; 1.0&nbsp; &nbsp; 23/09/12&nbsp; First sucessful control of Motor (w/ Reverse) via Playstation2 Controller<br>&nbsp; 1.1&nbsp; &nbsp; 28/09/12&nbsp; Clean up of code. No changes to functionality.&nbsp; Added comments for posting to forum.<br>*/<br><br>#include &lt;PS2X_lib.h&gt;&nbsp; //Library for interfacing with PS2 Controller. <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//Developed by: Bill Porter<br>&nbsp;
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp;//http://www.billporter.info/playstation-2-controller-arduino-library-v1-0/<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>#include &lt;Servo.h&gt;&nbsp; &nbsp; &nbsp;//include servo library<br><br>PS2X ps2x;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// create PS2 Controller Class<br>Servo myservo;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// create servo object to control servo<br>&nbsp;
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp;// maximum of eight servo objects can be created<br><br>/*#########################################<br>#####&nbsp; &nbsp; &nbsp;VARIABLE DECLALARATIONS&nbsp; &nbsp; &nbsp;#####<br>#########################################*/&nbsp; &nbsp; &nbsp;<br>int
+ servoPos = 0;&nbsp; &nbsp; &nbsp; // variable to store the servo 
+position&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>int LY = 0;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Variable for fixed values based on Left Stick Y-axis<br>int spd = 0;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// variable to define speed sent to motor/servo<br>int R1state = 0;&nbsp; &nbsp; &nbsp; &nbsp;// used to determine state of R1<br>int R2state = 0;&nbsp; &nbsp; &nbsp; &nbsp;// used to determine state of R2<br>int neutral = 96;&nbsp; &nbsp; &nbsp; // neutral position for ESC. Will vary depending on ESC.<br><br>/*<br>right now, the PS2X library does NOT support hot pluggable controllers, meaning <br>you must always either restart your Arduino after you conect the controller, <br>or call config_gamepad(pins) again after connecting the controller.<br>*/<br><br><br>int error = 0;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// used by PS2X.lib <br>byte type = 0;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// used by PS2X.lib<br>byte vibrate = 0;&nbsp; &nbsp; &nbsp; &nbsp; // used by PS2X.lib<br><br>// Following are used in system just to indicate state.&nbsp; <br>//If spare I/O is available, will include as visual display in final control setup.<br>int GRNled = 3;&nbsp; &nbsp; &nbsp; &nbsp; // Green LED FULL speed<br>int YLWled = 4;&nbsp; &nbsp; &nbsp; &nbsp; // Yellow LED half speed<br>int REDled = 5;&nbsp; &nbsp; &nbsp; &nbsp; // Red LED Neutral<br>int PNKled = 6;&nbsp; &nbsp; &nbsp; &nbsp; // Pink LED reverse<br><br>/*#########################################<br>#####&nbsp; &nbsp; &nbsp;END OF SECTION&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; #####<br>#########################################*/&nbsp; &nbsp; &nbsp;<br><br><br>void setup(){<br>&nbsp;Serial.begin(57600);&nbsp; &nbsp; // open serial communications. <br>&nbsp;
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp;// baudrate selected based on reccomendation for PS2X.lib<br><br>/*####################################################<br>#####&nbsp; &nbsp; &nbsp;DEFINE PINS OF PS2 CONTROLLER HERE&nbsp; &nbsp; &nbsp;#####<br>#####################################################*/&nbsp; &nbsp; &nbsp;<br>&nbsp; <br>&nbsp;error
+ = ps2x.config_gamepad(8,11,10,12, true, false);&nbsp; &nbsp;//setup 
+pins and settings:&nbsp; GamePad(clock, command, attention, data, 
+Pressures?, Rumble?) check for error<br>&nbsp;<br>&nbsp;//Error checking from PS2X example code.<br>&nbsp;if(error == 0){<br>&nbsp; &nbsp;Serial.println("Found Controller, configured successful");<br>&nbsp; &nbsp;Serial.println("Try out all the buttons, X will vibrate the controller, faster as you press harder;");<br>&nbsp; Serial.println("holding L1 or R1 will print out the analog stick values.");<br>&nbsp; Serial.println("Go to www.billporter.info for updates and to report bugs.");<br>&nbsp;}<br>&nbsp; &nbsp;<br>&nbsp; else if(error == 1)<br>&nbsp;
+ &nbsp;Serial.println("No controller found, check wiring, see readme.txt
+ to enable debug. visit www.billporter.info for troubleshooting tips");<br>&nbsp; &nbsp;<br>&nbsp; else if(error == 2)<br>&nbsp;
+ &nbsp;Serial.println("Controller found but not accepting commands. see 
+readme.txt to enable debug. Visit www.billporter.info for 
+troubleshooting tips");<br>&nbsp; &nbsp;<br>&nbsp; else if(error == 3)<br>&nbsp; &nbsp;Serial.println("Controller refusing to enter Pressures mode, may not support it. ");<br>&nbsp; &nbsp;<br>&nbsp; &nbsp;//Serial.print(ps2x.Analog(1), HEX);&nbsp; //Used only to debug PS2X code.<br>&nbsp; &nbsp;<br>&nbsp; &nbsp;type = ps2x.readType(); <br>&nbsp; &nbsp; &nbsp;switch(type) {<br>&nbsp; &nbsp; &nbsp; &nbsp;case 0:<br>&nbsp; &nbsp; &nbsp; &nbsp; Serial.println("Unknown Controller type");<br>&nbsp; &nbsp; &nbsp; &nbsp;break;<br>&nbsp; &nbsp; &nbsp; &nbsp;case 1:<br>&nbsp; &nbsp; &nbsp; &nbsp; Serial.println("DualShock Controller Found");<br>&nbsp; &nbsp; &nbsp; &nbsp;break;<br>&nbsp; &nbsp; &nbsp; &nbsp;case 2:<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Serial.println("GuitarHero Controller Found");<br>&nbsp; &nbsp; &nbsp; &nbsp;break;<br>&nbsp; &nbsp; &nbsp;}<br>&nbsp; &nbsp; &nbsp;<br>/*############################################<br>#####&nbsp; &nbsp; &nbsp;DEFINE remaining pins here&nbsp; &nbsp; &nbsp;#####<br>##############################################*/&nbsp; &nbsp; &nbsp;<br><br>&nbsp; myservo.attach(2);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//attach servo on pin 2 to the servo object<br>&nbsp; pinMode(GRNled, OUTPUT);&nbsp; &nbsp; &nbsp;// LED for visual confirmation of High speed mode<br>&nbsp; pinMode(YLWled, OUTPUT);&nbsp; &nbsp; &nbsp;// LED for visual confrimation of low speed mode<br>&nbsp; pinMode(REDled, OUTPUT);&nbsp; &nbsp; &nbsp;// LED for visual confirmation of Neutral state of motor<br>&nbsp; pinMode(PNKled, OUTPUT);&nbsp; &nbsp; &nbsp;// LED for visual confirmation of FWD direction of rotation<br>}<br>/*#####################################<br>#####&nbsp; &nbsp; &nbsp;END OF void setup()&nbsp; &nbsp; &nbsp;#####<br>######################################*/&nbsp; &nbsp; &nbsp;<br><br><br>void loop(){<br>&nbsp; &nbsp;/* You must Read Gamepad to get new values<br>&nbsp; &nbsp;Read GamePad and set vibration values<br>&nbsp; &nbsp;ps2x.read_gamepad(small motor on/off, larger motor strenght from 0-255)<br>&nbsp; &nbsp;if you don't enable the rumble, use ps2x.read_gamepad(); with no values<br>&nbsp; &nbsp;<br>&nbsp; &nbsp;you should call this at least once a second<br>&nbsp; &nbsp;*/<br>&nbsp; &nbsp;<br>&nbsp; &nbsp;<br>&nbsp; &nbsp;<br>&nbsp;if(error == 1)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// skip loop if no controller found<br>&nbsp; return;<br>&nbsp; <br>&nbsp; ps2x.read_gamepad();&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // read controller and set large motor to spin at 'vibrate' speed<br>&nbsp; <br>&nbsp; &nbsp; //set current position of Left Stick Y Axis to the variable LY<br>&nbsp; &nbsp; LY = ps2x.Analog(PSS_LY);<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; //limit value of LY to the range of 0 to 255<br>&nbsp; &nbsp; //value should automatically be constrained by controller, but this is just incase!<br>&nbsp; &nbsp; constrain(LY,0,255);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; <br>&nbsp; &nbsp;//determine state of "deadman" triggers<br>&nbsp; &nbsp;R1state = ps2x.Button(PSB_R1);<br>&nbsp; &nbsp;R2state = ps2x.Button(PSB_R2);<br><br>/*<br>For this program, I only use the Y-Axis (up down) of the LEFT joystick.&nbsp; The joystick has a range from 0 to 255.<br>0 = Full Up, 255 = Full down.&nbsp; This seemed counter intuitive to me...<br><br>After testing my ESC with a Potentiometer (code available upon request),<br>I discovered the following ranges for controlling the ESC<br><br>0 to 63&nbsp; &nbsp;No rotation. Maxed out?<br>64&nbsp; &nbsp; &nbsp; &nbsp; MAX "reverse"<br>92&nbsp; &nbsp; &nbsp; &nbsp; MIN "reverse"<br>93 - 100&nbsp; Neutral<br>101&nbsp; &nbsp; &nbsp; &nbsp;MIN "forward"<br>135&nbsp; &nbsp; &nbsp; &nbsp;MAX "forward"<br>136 - 255 No rotation. Maxed out?<br><br>Using the map() function, I was able to convert the 0-255 input of the controller<br>to a 63-135 output for the ESC.<br><br>The motor will only spin when 1 of 2 "deadman" switches are held. (R1 or R2)<br>R1 = Full Speed mode<br>R2 = 50% Speed mode<br><br>50% speed mode maintains 0-255 on the input, but limits output to 78-118.<br><br>*/<br>&nbsp;<br>&nbsp; &nbsp;<br>&nbsp; &nbsp; //##### Full speed mode #####<br>&nbsp; &nbsp; if((R1state ==1) &amp;&amp; (R2state==0)) {<br>&nbsp;
+ &nbsp; &nbsp; digitalWrite(GRNled, HIGH);&nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; // !! There must be a better way to code these LED lights.
+ Suggestions?<br>&nbsp; &nbsp; &nbsp; digitalWrite(YLWled, LOW);<br>&nbsp; &nbsp; &nbsp; digitalWrite(REDled, LOW);<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br>&nbsp; &nbsp; //set spd (speed) based on value of LY<br>&nbsp; &nbsp; if((LY &gt;= 0) &amp;&amp; (LY &lt;=112)){<br>&nbsp;
+ &nbsp; &nbsp; spd = map(LY, 0, 112, 64, 92);&nbsp; &nbsp; &nbsp; &nbsp;
+ //this command maps or "converts" the Joystick input to ESC output 
+range<br>&nbsp; &nbsp; &nbsp; digitalWrite(PNKled, HIGH);<br>&nbsp; &nbsp; &nbsp; //Clockwise rotation<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; if((LY &gt;=113) &amp;&amp; (LY &lt;=133)){<br>&nbsp; &nbsp; &nbsp; spd = map(LY, 113, 133, 93, 100);<br>&nbsp; &nbsp; &nbsp; digitalWrite(PNKled, LOW);<br>&nbsp; &nbsp; &nbsp; //Neutral<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; if((LY &gt;=134) &amp;&amp; (LY &lt;=255)) {<br>&nbsp; &nbsp; &nbsp; spd = map(LY, 134, 255, 101, 135);<br>&nbsp; &nbsp; &nbsp; digitalWrite(PNKled, LOW);<br>&nbsp; &nbsp; &nbsp; //Counter Clockwise<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; //##### Half speed mode #####<br>&nbsp; &nbsp; if((R1state ==0) &amp;&amp; (R2state==1)) {<br>&nbsp; &nbsp; &nbsp; digitalWrite(GRNled, LOW);<br>&nbsp; &nbsp; &nbsp; digitalWrite(YLWled, HIGH);<br>&nbsp; &nbsp; &nbsp; digitalWrite(REDled, LOW);<br>&nbsp; &nbsp; &nbsp;<br>&nbsp; &nbsp; //set spd (speed) based on value of LY<br>&nbsp; &nbsp; if((LY &gt;= 0) &amp;&amp; (LY &lt;=112)){<br>&nbsp; &nbsp; &nbsp; spd = map(LY, 0, 112, 78, 92);<br>&nbsp; &nbsp; &nbsp; digitalWrite(PNKled, HIGH);<br>&nbsp; &nbsp; &nbsp; //Clockwise rotation<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; if((LY &gt;=113) &amp;&amp; (LY &lt;=133)){<br>&nbsp; &nbsp; &nbsp; spd = map(LY, 113, 133, 93, 100);<br>&nbsp; &nbsp; &nbsp; digitalWrite(PNKled, LOW);<br>&nbsp; &nbsp; &nbsp; //Neutral<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; if((LY &gt;=134) &amp;&amp; (LY &lt;=255)) {<br>&nbsp; &nbsp; &nbsp; spd = map(LY, 134, 255, 101, 118);<br>&nbsp; &nbsp; &nbsp; digitalWrite(PNKled, LOW);<br>&nbsp; &nbsp; &nbsp; //Counter Clockwise<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; <br>&nbsp; &nbsp; //print values for debuging<br>&nbsp; &nbsp; Serial.print(LY); //ps2x.Analog(PSS_LY));<br>&nbsp; &nbsp; Serial.print(" ");<br>&nbsp; &nbsp; Serial.print(spd);<br>&nbsp; &nbsp; Serial.print(" ");<br>&nbsp; &nbsp; Serial.print(ps2x.Button(PSB_R1));<br>&nbsp; &nbsp; Serial.print(" ");<br>&nbsp; &nbsp; Serial.println(ps2x.Button(PSB_R2));<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; //send value to servo/motor<br>&nbsp; &nbsp; if((R1state == 1) || (R2state ==1)) {<br>&nbsp;
+ &nbsp; &nbsp; myservo.write(spd);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //if either "deadman" switch is held,
+ send the correct 'mapped' speed value to the ESC.<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; if((R1state==0) &amp;&amp; (R2state==0)) {<br>&nbsp;
+ &nbsp; &nbsp; myservo.write(neutral);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+ &nbsp; &nbsp; &nbsp; //if neither "deadman" switch is held, send 
+'neutral' to the Servo.<br>&nbsp; &nbsp; &nbsp; digitalWrite(GRNled, LOW);<br>&nbsp; &nbsp; &nbsp; digitalWrite(YLWled, LOW);<br>&nbsp; &nbsp; &nbsp; digitalWrite(REDled, HIGH);<br>&nbsp; &nbsp; &nbsp; digitalWrite(PNKled, LOW);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <br>&nbsp; &nbsp; //allow servo/motor to achieve target speed<br>&nbsp; &nbsp; delay(50);<br>&nbsp; &nbsp; &nbsp;<br>}<br>/* I am by no means a pro at Arduino programming. If you notice any bugs, please let me know! */<br><br></div><br><br>You
+ will need to download the PS2X library from the site listed in the 
+code, as well as follow HIS guide for wiring.  The trickiest part is 
+getting the correct wires from the controller.  I ended up having to 
+open my controller and check each wire with a meter as I got a cheap 
+third party one... my analog arrow keys do not even work as analog...<br><br>Best of luck!</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4096"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1664"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4096"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4096"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row2">
+
+			<td align="center" valign="middle">
+				<a name="p4098"></a>
+				<b class="postauthor">DavidF</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4098">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4098#p4098"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Sep 28th, 2012, 6:05 pm&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 27th, 2012, 3:15 pm<br><b>Posts:</b> 90<br><b>Location:</b> Delaware
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">Perfect timing, just got my ps2 controllers in the mail 10 min ago.</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4098"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1660"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4098"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4098"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row1">
+
+			<td align="center" valign="middle">
+				<a name="p4100"></a>
+				<b class="postauthor">DavidF</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4100">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4100#p4100"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Sep 29th, 2012, 2:30 pm&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 27th, 2012, 3:15 pm<br><b>Posts:</b> 90<br><b>Location:</b> Delaware
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">OK I have to admit im not much of a 
+electronics or programming kinda guy,  been staring at this code for a 
+few hours and I have to admit im a bit lost.  Is this code just for 
+configuring the controller?  then I would have to write more code once I
+ have configured the controller to controll different out puts?</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4100"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1660"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4100"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4100"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row2">
+
+			<td align="center" valign="middle">
+				<a name="p4101"></a>
+				<b class="postauthor">KR2_Diving</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4101">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4101#p4101"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Sep 29th, 2012, 5:52 pm&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				<tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/file.jpg" alt="User avatar" height="100" width="100"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 30th, 2012, 1:43 pm<br><b>Posts:</b> 251<br><b>Location:</b> Currently: NW Suburbs of Chicago. Originally: NE Wisconsin
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">This code is enough to run ONE motor with the controller.<br><br><br>All configured and ready to go.<br>In theory!</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4101"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1664"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4101"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4101"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row1">
+
+			<td align="center" valign="middle">
+				<a name="p4102"></a>
+				<b class="postauthor">DavidF</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4102">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4102#p4102"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Sep 29th, 2012, 8:38 pm&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 27th, 2012, 3:15 pm<br><b>Posts:</b> 90<br><b>Location:</b> Delaware
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">I guess my problem is this....<br>Serial.println("Found Controller, configured successful");<br>   Serial.println("Try out all the buttons, X will vibrate the controller, faster as you press harder;");<br>  Serial.println("holding L1 or R1 will print out the analog stick values.");<br>  Serial.println("Go to <!-- m --><a class="postlink" href="http://www.billporter.info/">http://www.billporter.info</a><!-- m --> for updates and to report bugs.");<br><br>
+  This seems like it is telling the computer to display the "found 
+controller" as text on the screen, but when you go to try and talk from 
+one arduino to another then wont the Serial.println become an issue as 
+you would need to serial.print to the rx arduino?<br><br>  Hope i make sense,  like i said I suck at programming, but im a killer at the mechanical stuff  <img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_e_biggrin.gif" alt=":D" title="Very Happy"><br><br> Edit   Never mind, it dawned on me at 3am that the mega has more one rx and tx ports.....</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4102"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1660"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4102"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4102"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row2">
+
+			<td align="center" valign="middle">
+				<a name="p4111"></a>
+				<b class="postauthor">derelicte</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4111">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4111#p4111"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Oct 1st, 2012, 10:51 am&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 1st, 2011, 5:08 pm<br><b>Posts:</b> 296
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">the way that code is written is for the 
+messages to come out the main serial port. if you have a mega and want 
+two arduinos to talk to each other, then you can send their messages out
+ serial1, 2, etc.<br><br>you can also use the software serial library to add another uart one any two other pins.</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4111"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1317"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4111"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4111"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row1">
+
+			<td align="center" valign="middle">
+				<a name="p4112"></a>
+				<b class="postauthor">DavidF</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4112">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4112#p4112"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Oct 1st, 2012, 1:12 pm&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 27th, 2012, 3:15 pm<br><b>Posts:</b> 90<br><b>Location:</b> Delaware
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">I have the arduino duemilanove, on it I 
+think the tx and rx 0,1 are on the same line as the usb so you can use 
+only one or the other??<br>  Like I said, Im no electronics programer an
+ I am probably wrong about this.  But on a brighter note, I printed out 
+the code and stared at it for a couple of hours last night and I pretty 
+much understand it now. I just need to sit down and give it a go, I feel
+ pretty comfortable I can get it to work, and may even add some more 
+outputs.  What I would like to see is one stick controll 2 thrusters so 
+you can move forward and steer off of one stick. I think the map 
+function would come in handy to do this.  What do you guys think?</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4112"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1660"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4112"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4112"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row2">
+
+			<td align="center" valign="middle">
+				<a name="p4117"></a>
+				<b class="postauthor">KR2_Diving</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4117">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4117#p4117"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Oct 1st, 2012, 5:07 pm&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				<tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/file.jpg" alt="User avatar" height="100" width="100"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 30th, 2012, 1:43 pm<br><b>Posts:</b> 251<br><b>Location:</b> Currently: NW Suburbs of Chicago. Originally: NE Wisconsin
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody"><div class="quotetitle">DavidF wrote:</div><div class="quotecontent">
+  What I would like to see is one stick controll 2 thrusters so you can 
+move forward and steer off of one stick. I think the map function would 
+come in handy to do this. </div><br><br>Hey David,<br>My ultimate goal 
+is one stick, 4 thrusters... I started playing with this over the 
+weekend myself... as you correctly stated, I think the map function, 
+along with some messy nested if statements might be the way to go... I'm
+ not quite sure how i am going to tackle that myself.<br><br>I will keep you posted!<br><br>As
+ for commenting on some of your other remarks: The print statements have
+ been kept in for the moment for trouble shooting.  Once I am confident 
+with the functionality of the code, they will be removed to save on the 
+processor.<br><br>Good Luck!</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4117"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1664"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4117"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4117"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row1">
+
+			<td align="center" valign="middle">
+				<a name="p4127"></a>
+				<b class="postauthor">DavidF</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4127">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4127#p4127"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Oct 2nd, 2012, 2:08 am&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 27th, 2012, 3:15 pm<br><b>Posts:</b> 90<br><b>Location:</b> Delaware
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">Im going to run the code by my boss and see 
+what his thoughts are, he is an old fart... oops  LOL  " edit" He knows a
+ bit about programming things like this and might have a better idea  <img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_e_biggrin.gif" alt=":D" title="Very Happy"></div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4127"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row1">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1660"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4127"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4127"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr class="row2">
+
+			<td align="center" valign="middle">
+				<a name="p4129"></a>
+				<b class="postauthor">derelicte</b>
+			</td>
+			<td height="25" width="100%">
+				<table cellspacing="0" width="100%">
+				<tbody><tr>
+				
+					<td class="gensmall" width="100%"><div style="float: left;">&nbsp;<b>Post subject:</b> <a href="#p4129">Re: PS2 Control of Brushless Motor and ESC via Arduino</a></div><div style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?p=4129#p4129"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_target.gif" alt="Post" title="Post" height="9" width="12"></a><b>Posted:</b> Oct 2nd, 2012, 11:10 am&nbsp;</div></td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile" valign="top">
+				<table align="center" cellspacing="4" width="150">
+			
+				<tbody><tr>
+					<td><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_offline.gif" alt="Offline" title="Offline"></td>
+				</tr>
+			
+				</tbody></table>
+
+				<span class="postdetails">
+					<br><b>Joined:</b> Aug 1st, 2011, 5:08 pm<br><b>Posts:</b> 296
+				</span>
+
+			</td>
+			<td valign="top">
+				<table cellspacing="5" width="100%">
+				<tbody><tr>
+					<td>
+					
+
+						<div class="postbody">yeah, on the non mega arduinos the single 
+serial port is shared with the usb connection. that is why I suggested 
+using the softwareserial library for extra serial ports for 
+inter-arduino communications. you don't need to send a whole lot of 
+data, so 9600 baud is fine. when I use the softwareserial ports, I try 
+to run them slower than the hw ones.<br><br>If you look at my code, I have all the math to drive two thrusters from a single stick. It is actually pretty simple.</div>
+
+					<br clear="all"><br>
+
+						<table cellspacing="0" width="100%">
+						<tbody><tr valign="middle">
+							<td class="gensmall" align="right">
+							<a href="http://www.homebuiltrovs.com/rovforum/report.php?f=15&amp;p=4129"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_report.gif" alt="Report this post" title="Report this post"></a> 
+							</td>
+						</tr>
+						</tbody></table>
+					</td>
+				</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr class="row2">
+
+			<td class="profile"><strong><a href="#wrapheader">Top</a></strong></td>
+			<td><div class="gensmall" style="float: left;">&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=1317"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_user_profile.gif" alt="Profile" title="Profile"></a> <a href="http://www.homebuiltrovs.com/rovforum/ucp.php?i=pm&amp;mode=compose&amp;action=quotepost&amp;p=4129"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_contact_pm.gif" alt="Send private message" title="Send private message"></a> &nbsp;</div> <div class="gensmall" style="float: right;"><a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=quote&amp;f=15&amp;p=4129"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/icon_post_quote.gif" alt="Reply with quote" title="Reply with quote"></a> &nbsp;</div></td>
+	
+		</tr>
+
+	<tr>
+		<td class="spacer" colspan="2" height="1"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/spacer.gif" alt="" height="1" width="1"></td>
+	</tr>
+	</tbody></table>
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr align="center">
+		<td class="cat"><form name="viewtopic" method="post" action="./viewtopic.php?f=15&amp;t=831"><span class="gensmall">Display posts from previous:</span> <select name="st" id="st"><option value="0" selected="selected">All posts</option><option value="1">1 day</option><option value="7">7 days</option><option value="14">2 weeks</option><option value="30">1 month</option><option value="90">3 months</option><option value="180">6 months</option><option value="365">1 year</option></select>&nbsp;<span class="gensmall">Sort by</span> <select name="sk" id="sk"><option value="a">Author</option><option value="t" selected="selected">Post time</option><option value="s">Subject</option></select> <select name="sd" id="sd"><option value="a" selected="selected">Ascending</option><option value="d">Descending</option></select>&nbsp;<input class="btnlite" value="Go" name="sort" type="submit"></form></td>
+	</tr>
+	</tbody></table>
+	
+
+	<table cellspacing="1" width="100%">
+	<tbody><tr>
+		<td align="left" nowrap="nowrap" valign="middle">
+		<a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=post&amp;f=15"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/button_topic_new.gif" alt="Post new topic" title="Post new topic"></a>&nbsp;<a href="http://www.homebuiltrovs.com/rovforum/posting.php?mode=reply&amp;f=15&amp;t=831"><img src="Homebuilt%20Rov%20Forum%20%E2%80%A2%20View%20topic%20-%20PS2%20Control%20of%20Brushless%20Motor%20and%20ESC%20via%20Arduino_arquivos/button_topic_reply.gif" alt="Reply to topic" title="Reply to topic"></a>
+		</td>
+		
+			<td class="nav" nowrap="nowrap" valign="middle">&nbsp;Page <strong>1</strong> of <strong>2</strong><br></td>
+			<td class="gensmall" nowrap="nowrap">&nbsp;[ 20 posts ]&nbsp;</td>
+			<td class="gensmall" align="right" nowrap="nowrap" width="100%"><b><a href="#" onclick="jumpto(); return false;" title="Click to jump to page…">Go to page</a> <strong>1</strong><span class="page-sep">, </span><a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;start=10">2</a> &nbsp;<a href="http://www.homebuiltrovs.com/rovforum/viewtopic.php?f=15&amp;t=831&amp;start=10">Next</a></b></td>
+		
+	</tr>
+	</tbody></table>
+
+</div>
+
+<div id="pagefooter"></div>
+
+<br clear="all">
+<table class="tablebg" style="margin-top: 5px;" cellpadding="0" cellspacing="1" width="100%">
+	<tbody><tr>
+		<td class="row1">
+			<p class="breadcrumbs"><a href="http://www.homebuiltrovs.com/rovforum/index.php">Board index</a> » <a href="http://www.homebuiltrovs.com/rovforum/viewforum.php?f=11">On the Bench - Pieces and Parts</a> » <a href="http://www.homebuiltrovs.com/rovforum/viewforum.php?f=15">Control Systems and Tethers</a></p>
+			<p class="datetime">All times are UTC - 3 hours [ <abbr title="Daylight Saving Time">DST</abbr> ]</p>
+		</td>
+	</tr>
+	</tbody></table>
+	<br clear="all">
+
+	<table class="tablebg" cellspacing="1" width="100%">
+	<tbody><tr>
+		<td class="cat"><h4>Who is online</h4></td>
+	</tr>
+	<tr>
+		<td class="row1"><p class="gensmall">Users browsing this forum: <a href="http://www.homebuiltrovs.com/rovforum/memberlist.php?mode=viewprofile&amp;u=2135">tcholas</a> and 0 guests</p></td>
+	</tr>
+	</tbody></table>
+
+
+<br clear="all">
+
+<table cellspacing="1" width="100%">
+<tbody><tr>
+	<td align="left" nowrap="nowrap" valign="top" width="40%"></td>
+	<td align="right" nowrap="nowrap" valign="top"><span class="gensmall">You <strong>can</strong> post new topics in this forum<br>You <strong>can</strong> reply to topics in this forum<br>You <strong>can</strong> edit your posts in this forum<br>You <strong>cannot</strong> delete your posts in this forum<br>You <strong>can</strong> post attachments in this forum<br></span></td>
+</tr>
+</tbody></table>
+
+<br clear="all">
+
+<table cellspacing="0" width="100%">
+<tbody><tr>
+	<td><form method="get" name="search" action="./search.php"><span class="gensmall">Search for:</span> <input class="post" name="keywords" size="20" type="text"> <input class="btnlite" value="Go" type="submit"><input name="t" value="831" type="hidden">
+<input name="sf" value="msgonly" type="hidden">
+</form></td>
+	<td align="right">
+	<form method="post" name="jumpbox" action="./viewforum.php" onsubmit="if(document.jumpbox.f.value == -1){return false;}">
+
+	<table border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td nowrap="nowrap"><span class="gensmall">Jump to:</span>&nbsp;<select name="f" onchange="if(this.options[this.selectedIndex].value != -1){ document.forms['jumpbox'].submit() }">
+
+		
+			<option value="-1">Select a forum</option>
+		<option value="-1">------------------</option>
+			<option value="8">Still on the Dock - Newcomers &amp; Site Support</option>
+		
+			<option value="33">&nbsp; &nbsp;**** READ THIS BEFORE TRYING TO JOIN ****    **** READ THIS BEFORE TRYING TO JOIN ****</option>
+		
+			<option value="7">&nbsp; &nbsp;Board Messages</option>
+		
+			<option value="10">&nbsp; &nbsp;Forum Help &amp; How To's</option>
+		
+			<option value="19">&nbsp; &nbsp;Tests</option>
+		
+			<option value="9">&nbsp; &nbsp;Introductions</option>
+		
+			<option value="30">&nbsp; &nbsp;Get Your Feet Wet</option>
+		
+			<option value="34">In the Shop</option>
+		
+			<option value="35">&nbsp; &nbsp;Your Workshops</option>
+		
+			<option value="36">&nbsp; &nbsp;The Tool Room</option>
+		
+			<option value="11">On the Bench - Pieces and Parts</option>
+		
+			<option value="15" selected="selected">&nbsp; &nbsp;Control Systems and Tethers</option>
+		
+			<option value="13">&nbsp; &nbsp;Frames, Hulls, &amp; Bouyancy</option>
+		
+			<option value="3">&nbsp; &nbsp;Thrusters</option>
+		
+			<option value="4">&nbsp; &nbsp;Cameras</option>
+		
+			<option value="12">&nbsp; &nbsp;Lighting</option>
+		
+			<option value="14">&nbsp; &nbsp;Manipulators &amp; Tools</option>
+		
+			<option value="16">&nbsp; &nbsp;Electronics</option>
+		
+			<option value="22">&nbsp; &nbsp;Miscellaneous</option>
+		
+			<option value="37">The Code Room - Programing</option>
+		
+			<option value="39">&nbsp; &nbsp;Visual Basic</option>
+		
+			<option value="40">&nbsp; &nbsp;C/C++</option>
+		
+			<option value="38">&nbsp; &nbsp;Arduino</option>
+		
+			<option value="41">&nbsp; &nbsp;Raspberry PI</option>
+		
+			<option value="42">&nbsp; &nbsp;Beaglebone</option>
+		
+			<option value="43">&nbsp; &nbsp;Miscellaneous Programing</option>
+		
+			<option value="17">In the Water</option>
+		
+			<option value="18">&nbsp; &nbsp;Your ROV Projects</option>
+		
+			<option value="20">&nbsp; &nbsp;AUV's</option>
+		
+			<option value="31">&nbsp; &nbsp;Mission Footage</option>
+		
+			<option value="23">Competitions</option>
+		
+			<option value="24">&nbsp; &nbsp;MATE</option>
+		
+			<option value="26">&nbsp; &nbsp;&nbsp; &nbsp;Team A Test</option>
+		
+			<option value="29">&nbsp; &nbsp;&nbsp; &nbsp;The Enterprise</option>
+		
+			<option value="32">&nbsp; &nbsp;&nbsp; &nbsp;AngryWizardROV</option>
+		
+			<option value="25">&nbsp; &nbsp;NURC</option>
+		
+			<option value="27">Back on Shore</option>
+		
+			<option value="28">&nbsp; &nbsp;The Mission is Over</option>
+		
+
+		</select>&nbsp;<input class="btnlite" value="Go" type="submit"></td>
+	</tr>
+	</tbody></table>
+
+	</form>
+</td>
+</tr>
+</tbody></table>
+
+
+</div>
+
+<div id="wrapfooter">
+	
+	<span class="copyright">Powered by <a href="http://www.phpbb.com/">phpBB</a>® Forum Software © phpBB Group
+	</span>
+</div>
+
+
+</body></html>

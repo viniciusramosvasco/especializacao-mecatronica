@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><!--<![endif]--><head> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Gyro + Arduino + Processing   |   Odis Harkins  |  All for Him and For His Glory</title>    
+
+  <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->    
+  
+  <link href="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/css.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/framework.css">
+  <link rel="stylesheet" href="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/jquery.css">
+  <link rel="stylesheet" href="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/style.css" type="text/css" media="screen">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="index, follow">
+<meta name="description" content="I took it on as a project to see if could virtually control a 2 dimensional object using a simple gyro connected through a arduino. Code for Processing import processing.serial.*; ...">
+		
+			<meta property="og:title" content="Gyro + Arduino + Processing">
+		<meta property="og:type" content="article">
+		<meta property="og:url" content="http://odisharkins.com/robotics/gyro-arduino-processing/">
+		<meta property="og:description" content="">
+				<meta property="og:site_name" content="">
+			<link rel="alternate" type="application/rss+xml" title="Odis Harkins » Feed" href="http://odisharkins.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Odis Harkins » Comments Feed" href="http://odisharkins.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Odis Harkins » Gyro + Arduino + Processing Comments Feed" href="http://odisharkins.com/robotics/gyro-arduino-processing/feed/">
+<div class="fit-vids-style">­<style>               .fluid-width-video-wrapper {                 width: 100%;                              position: relative;                       padding: 0;                            }                                                                                   .fluid-width-video-wrapper iframe,        .fluid-width-video-wrapper object,        .fluid-width-video-wrapper embed {           position: absolute;                       top: 0;                                   left: 0;                                  width: 100%;                              height: 100%;                          }                                       </style></div><script src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+		/* <![CDATA[ */
+		var slider_config = {"slideshow":1,"autoplay":1,"slide_interval":6000,"transition":1,"transition_speed":2000,"pause_hover":0,"keyboard_nav":1,"performance":1,"image_protect":1}
+		/* ]]> */</script><script type="text/javascript">
+/* <![CDATA[ */
+var colabs_settings = {"theme_url":"http:\/\/odisharkins.com\/wp-content\/themes\/lensa"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/jquery.js"></script>
+<script type="text/javascript" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/jquery-migrate.js"></script>
+<script type="text/javascript" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/plugins.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var config = {"ajaxurl":"http:\/\/odisharkins.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/scripts.js"></script>
+<script type="text/javascript" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/external-tracking.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://odisharkins.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://odisharkins.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.0">
+<link rel="canonical" href="http://odisharkins.com/robotics/gyro-arduino-processing/">
+<link rel="shortlink" href="http://odisharkins.com/?p=1291">
+<style type="text/css" media="screen">.fullstripe-form-title{ font-size: 120%;  color: #363636; font-weight: bold;}
+.fullstripe-form-input{}
+.fullstripe-form-label{font-weight: bold;}</style>
+<!-- Theme version -->
+<meta name="generator" content="Lensa 1.0.9.2">
+<meta name="generator" content="CoLabsFramework 1.8.6.4">
+<!-- Alt Stylesheet -->
+<!-- Custom Favicon -->
+<link rel="shortcut icon" href="http://grassfire.harkinstech.com/wp-content/themes/lensa/images/favicon.png">
+
+<!-- CoLabs Shortcodes CSS -->
+<link href="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/shortcodes.css" rel="stylesheet" type="text/css">
+
+<!-- Custom Stylesheet -->
+<link href="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/custom.css" rel="stylesheet" type="text/css">
+  
+  <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://odisharkins.com/feed/">
+  <link rel="pingback" href="http://odisharkins.com/xmlrpc.php">
+  <link rel="alternate" type="text/xml" title="RSS .92" href="http://odisharkins.com/feed/rss/">
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://odisharkins.com/feed/atom/">
+  
+<!-- Google Analytics Tracking by Google Analyticator 6.4.7.3: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">
+                var analyticsFileTypes = [''];
+                            var analyticsSnippet = 'enabled';
+                var analyticsEventTracking = 'enabled';
+            </script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+  
+	_gaq.push(['_setAccount', 'UA-36613606-1']);
+    _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+ 
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+	<script type="text/javascript">slides = [{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/05/297354_2418463909337_992741102_n.jpg',                
+          title   :'Island Life',
+          url   :'http://odisharkins.com/photograph/island-life/',               
+          caption :''
+        },{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/02/2014-02-16-19.28.41-1.jpg',                
+          title   :'Winter Jam 2014',
+          url   :'http://odisharkins.com/photograph/winter-jam-2014-2/',               
+          caption :'There were many people that were witnessed to in Virginia this weekend. '
+        },{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/05/320572_2418464309347_972079495_n.jpg',                
+          title   :'Isaiah 40:30-31',
+          url   :'http://odisharkins.com/photograph/isaiah-4031/',               
+          caption :'Even youths shall faint and be weary,and young men shall fall exhausted;but they who wait for the LORD shall renew their strength;they shall mount up with wings like eagles;they shall run and not be weary;they shall walk and not faint.'
+        },{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/05/319257_2418455949138_1238551600_n.jpg',                
+          title   :'Alaska',
+          url   :'http://odisharkins.com/photograph/alaska/',               
+          caption :''
+        },{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/02/2014-02-16-19.29.01.jpg',                
+          title   :'Winter Jam 2014',
+          url   :'http://odisharkins.com/photograph/winter-jam-2014/',               
+          caption :'Beauty In Blue.'
+        },{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/02/2014-02-16-20.02.10.jpg',                
+          title   :'Winter Jam 2014',
+          url   :'http://odisharkins.com/photograph/1210-2/',               
+          caption :'Lighting is Amazing! '
+        },{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/02/2013-12-06-16.28.22-HDR.jpg',                
+          title   :'Winters Beach',
+          url   :'http://odisharkins.com/photograph/winters-beach/',               
+          caption :''
+        },{                  
+          image   :'http://odisharkins.com/wp-content/uploads/2014/02/2014-01-23-20.44.42-HDR.jpg',                
+          title   :'Love for Lighting',
+          url   :'http://odisharkins.com/photograph/love-for-lighting/',               
+          caption :'Lighting is my passion '
+        }]</script>	
+</head>
+
+<body class="page page-id-1291 page-child parent-pageid-883 page-template page-template-template-SideBarPage-php gecko">
+  <header class="header-section container">
+  <div class="row">
+    <div class="branding column col4">
+      <h1 class="logo">
+        <a href="http://odisharkins.com/">
+          Odis Harkins      
+        </a>    
+      </h1>      
+      <div class="site-description">All for Him and For His Glory</div>    
+    </div><!-- .branding -->   
+
+    <a class="btn-navbar collapsed">      
+      <span class="icon-bar"></span>      
+      <span class="icon-bar"></span>      
+      <span class="icon-bar"></span>    
+    </a>    
+
+    <nav class="nav-collapse collapse column col8">   
+      <nav class="top-nav"><ul id="menu-menu-1" class="sf-menu sf-js-enabled"><li id="menu-item-1238" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1238"><a href="http://odisharkins.com/">Home</a></li>
+<li id="menu-item-1246" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1246"><a href="http://oharkins.theneriumlook.com/">Nerium</a></li>
+<li id="menu-item-1239" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1239"><a href="http://odisharkins.com/about-me/">About Me</a></li>
+<li id="menu-item-1240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1240"><a href="http://odisharkins.com/blog/">Blog</a></li>
+<li id="menu-item-1242" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor current-menu-ancestor current-menu-parent current-page-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1242"><a class="sf-with-ul" href="http://odisharkins.com/robotics/">Robotics<span class="sf-sub-indicator"><i class="icon-caret-down"></i></span></a>
+<ul style="display: none; visibility: hidden;" class="sub-menu">
+	<li id="menu-item-1244" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1244"><a href="http://odisharkins.com/robotics/smasherbot/">SmasherBot</a></li>
+	<li id="menu-item-1243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1243"><a href="http://odisharkins.com/robotics/arduino-bluetooth-commuincations/">Arduino Bluetooth Commuincations</a></li>
+	<li id="menu-item-1298" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1291 current_page_item menu-item-1298"><a href="http://odisharkins.com/robotics/gyro-arduino-processing/">Gyro + Arduino + Processing</a></li>
+</ul>
+</li>
+<li id="menu-item-1318" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1318"><a class="sf-with-ul" href="http://odisharkins.com/computer-work/">Computer Work<span class="sf-sub-indicator"><i class="icon-caret-down"></i></span></a>
+<ul style="display: none; visibility: hidden;" class="sub-menu">
+	<li id="menu-item-1319" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1319"><a href="http://odisharkins.com/computer-work/pay-your-bill/">Pay Your Bill</a></li>
+	<li id="menu-item-1328" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1328"><a href="http://odisharkins.com/computer-work/buy-some-time/">Buy Some Time</a></li>
+</ul>
+</li>
+</ul></nav><!-- .topnav -->    
+    </nav><!-- .nav-collapse -->      
+  </div></header><!-- .header-section -->
+
+  <div class="main-container container"><div class="row">
+    <header class="page-heading block-background block-inner">
+      <h3>  Gyro + Arduino + Processing</h3>
+	  <div class="minimize"></div>
+    </header><!-- .page-heading -->
+  
+    <div class="main-content block-background column col8">
+            <div class="block-inner">
+        <article class="entry-post">
+          
+          <div class="entry-content">
+			<p>I took it on as a project to see if could virtually control a 2 
+dimensional object using a simple gyro connected through a arduino.</p>
+<p><div style="padding-top: 56.25%;" class="fluid-width-video-wrapper"><iframe id="fitvid982925" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/ByDUO_pqz68.htm" allowfullscreen="" frameborder="0"></iframe></div></p>
+<p><br></p>
+<h2>Code for Processing</h2>
+<pre><code>
+import processing.serial.*;
+
+Serial myPort;       
+int linefeed = 10;   // Linefeed in ASCII
+int numSensors = 3;  // we will be expecting for reading data from 3 sensors
+int sensors[];       // array to read the 3 values
+
+
+
+void setup() {
+  size(420, 360, P3D);  
+  // List all the available serial ports in the output pane. 
+  // You will need to choose the port that the Wiring board is 
+  // connected to from this list. The first port in the list is 
+  // port #0 and the third port in the list is port #2. 
+  println(Serial.list()); 
+  
+  myPort = new Serial(this, Serial.list()[0], 115200);
+  // read bytes into a buffer until you get a linefeed (ASCII 10):
+  myPort.bufferUntil(linefeed);
+}
+
+void draw() {
+  if((pSensors != null)&amp;&amp;(sensors != null)) { 
+    
+    // now do something with the values read sensors[0] .. sensors[2]
+     //First I find all my rotation angles in radians so that center screen is (0,0)
+    float rotz = (sensors[0]*PI)/180;
+    float rotx = (sensors[1]*PI)/180;
+    //float roty = (sensors[2]*PI)/180;
+    float roty = 0;
+    
+    background(0);
+    stroke(0, 0, 200);
+    //line (0,20,420,20); // monitor bar
+    fill(255);
+    textSize(10);
+    //text (" rotateX(" + rotx +" pi)"+" , rotateY("+roty+" pi)"+" , rotateZ("+rotz+" pi)", 0,10);
+    fill(0, 0, 200);
+     
+    translate(210, 180, 0); // center drawing start point in screen
+     
+    strokeWeight(1);
+    stroke(50);
+    line(-60, 0, 60, 0);       //
+    line(0, 60, 0, -60);       // draw stationary axis lines
+    line(0, 0, -60, 0, 0, 60); //
+    strokeWeight(1);
+    stroke(0, 150, 0);
+    noFill();
+    box(140);                  // draw stationary box
+     
+     
+    rotateX(rotx);  //
+    rotateY(roty);  // rotate drawing coordinates according to user input variables
+    rotateZ(rotz);  //
+    strokeWeight(2);
+    stroke(255);
+    line(-150, 0, 150, 0);       //
+    line(0, 150, 0, -150);       // draw the rotating axis lines
+    line(0, 0, -150, 0, 0, 150); //
+    strokeWeight(2);
+    stroke(255, 0, 0);
+    noFill();
+    box(140); // draw rotating red box
+  
+  }
+}
+
+void serialEvent(Serial myPort) {
+
+  // read the serial buffer:
+  String myString = myPort.readStringUntil(linefeed);
+
+  // if you got any bytes other than the linefeed:
+  if (myString != null) {
+
+    myString = trim(myString);
+
+    // split the string at the commas
+    // and convert the sections into integers:
+
+    pSensors = sensors;
+    sensors = int(split(myString, ','));
+
+    // print out the values you got:
+    
+    for (int sensorNum = 0; sensorNum &lt; sensors.length; sensorNum++) {
+      print("Sensor " + sensorNum + ": " + sensors[sensorNum] + "\t");
+    }
+    
+    // add a linefeed after all the sensor values are printed:
+    println();
+  }
+}
+</code>
+</pre>
+<h2>Code For the Arduino</h2>
+<pre><code>
+// MPU-6050 Accelerometer + Gyro
+// -----------------------------
+//
+// By arduino.cc user "Krodal".
+//
+// June 2012
+//      first version
+// July 2013
+//      The 'int' in the union for the x,y,z
+//      changed into int16_t to be compatible
+//      with Arduino Due.
+//
+// Open Source / Public Domain
+//
+// Using Arduino 1.0.1
+// It will not work with an older version,
+// since Wire.endTransmission() uses a parameter
+// to hold or release the I2C bus.
+//
+// Documentation:
+// - The InvenSense documents:
+//   - "MPU-6000 and MPU-6050 Product Specification",
+//     PS-MPU-6000A.pdf
+//   - "MPU-6000 and MPU-6050 Register Map and Descriptions",
+//     RM-MPU-6000A.pdf or RS-MPU-6000A.pdf
+//   - "MPU-6000/MPU-6050 9-Axis Evaluation Board User Guide"
+//     AN-MPU-6000EVB.pdf
+//
+// The accuracy is 16-bits.
+//
+// Temperature sensor from -40 to +85 degrees Celsius
+//   340 per degrees, -512 at 35 degrees.
+//
+// At power-up, all registers are zero, except these two:
+//      Register 0x6B (PWR_MGMT_2) = 0x40  (I read zero).
+//      Register 0x75 (WHO_AM_I)   = 0x68.
+//
+ 
+#include <wire.h>
+ 
+ 
+// The name of the sensor is "MPU-6050".
+// For program code, I omit the '-',
+// therefor I use the name "MPU6050....".
+ 
+ 
+// Register names according to the datasheet.
+// According to the InvenSense document
+// "MPU-6000 and MPU-6050 Register Map
+// and Descriptions Revision 3.2", there are no registers
+// at 0x02 ... 0x18, but according other information
+// the registers in that unknown area are for gain
+// and offsets.
+//
+#define MPU6050_AUX_VDDIO          0x01   // R/W
+#define MPU6050_SMPLRT_DIV         0x19   // R/W
+#define MPU6050_CONFIG             0x1A   // R/W
+#define MPU6050_GYRO_CONFIG        0x1B   // R/W
+#define MPU6050_ACCEL_CONFIG       0x1C   // R/W
+#define MPU6050_FF_THR             0x1D   // R/W
+#define MPU6050_FF_DUR             0x1E   // R/W
+#define MPU6050_MOT_THR            0x1F   // R/W
+#define MPU6050_MOT_DUR            0x20   // R/W
+#define MPU6050_ZRMOT_THR          0x21   // R/W
+#define MPU6050_ZRMOT_DUR          0x22   // R/W
+#define MPU6050_FIFO_EN            0x23   // R/W
+#define MPU6050_I2C_MST_CTRL       0x24   // R/W
+#define MPU6050_I2C_SLV0_ADDR      0x25   // R/W
+#define MPU6050_I2C_SLV0_REG       0x26   // R/W
+#define MPU6050_I2C_SLV0_CTRL      0x27   // R/W
+#define MPU6050_I2C_SLV1_ADDR      0x28   // R/W
+#define MPU6050_I2C_SLV1_REG       0x29   // R/W
+#define MPU6050_I2C_SLV1_CTRL      0x2A   // R/W
+#define MPU6050_I2C_SLV2_ADDR      0x2B   // R/W
+#define MPU6050_I2C_SLV2_REG       0x2C   // R/W
+#define MPU6050_I2C_SLV2_CTRL      0x2D   // R/W
+#define MPU6050_I2C_SLV3_ADDR      0x2E   // R/W
+#define MPU6050_I2C_SLV3_REG       0x2F   // R/W
+#define MPU6050_I2C_SLV3_CTRL      0x30   // R/W
+#define MPU6050_I2C_SLV4_ADDR      0x31   // R/W
+#define MPU6050_I2C_SLV4_REG       0x32   // R/W
+#define MPU6050_I2C_SLV4_DO        0x33   // R/W
+#define MPU6050_I2C_SLV4_CTRL      0x34   // R/W
+#define MPU6050_I2C_SLV4_DI        0x35   // R  
+#define MPU6050_I2C_MST_STATUS     0x36   // R
+#define MPU6050_INT_PIN_CFG        0x37   // R/W
+#define MPU6050_INT_ENABLE         0x38   // R/W
+#define MPU6050_INT_STATUS         0x3A   // R  
+#define MPU6050_ACCEL_XOUT_H       0x3B   // R  
+#define MPU6050_ACCEL_XOUT_L       0x3C   // R  
+#define MPU6050_ACCEL_YOUT_H       0x3D   // R  
+#define MPU6050_ACCEL_YOUT_L       0x3E   // R  
+#define MPU6050_ACCEL_ZOUT_H       0x3F   // R  
+#define MPU6050_ACCEL_ZOUT_L       0x40   // R  
+#define MPU6050_TEMP_OUT_H         0x41   // R  
+#define MPU6050_TEMP_OUT_L         0x42   // R  
+#define MPU6050_GYRO_XOUT_H        0x43   // R  
+#define MPU6050_GYRO_XOUT_L        0x44   // R  
+#define MPU6050_GYRO_YOUT_H        0x45   // R  
+#define MPU6050_GYRO_YOUT_L        0x46   // R  
+#define MPU6050_GYRO_ZOUT_H        0x47   // R  
+#define MPU6050_GYRO_ZOUT_L        0x48   // R  
+#define MPU6050_EXT_SENS_DATA_00   0x49   // R  
+#define MPU6050_EXT_SENS_DATA_01   0x4A   // R  
+#define MPU6050_EXT_SENS_DATA_02   0x4B   // R  
+#define MPU6050_EXT_SENS_DATA_03   0x4C   // R  
+#define MPU6050_EXT_SENS_DATA_04   0x4D   // R  
+#define MPU6050_EXT_SENS_DATA_05   0x4E   // R  
+#define MPU6050_EXT_SENS_DATA_06   0x4F   // R  
+#define MPU6050_EXT_SENS_DATA_07   0x50   // R  
+#define MPU6050_EXT_SENS_DATA_08   0x51   // R  
+#define MPU6050_EXT_SENS_DATA_09   0x52   // R  
+#define MPU6050_EXT_SENS_DATA_10   0x53   // R  
+#define MPU6050_EXT_SENS_DATA_11   0x54   // R  
+#define MPU6050_EXT_SENS_DATA_12   0x55   // R  
+#define MPU6050_EXT_SENS_DATA_13   0x56   // R  
+#define MPU6050_EXT_SENS_DATA_14   0x57   // R  
+#define MPU6050_EXT_SENS_DATA_15   0x58   // R  
+#define MPU6050_EXT_SENS_DATA_16   0x59   // R  
+#define MPU6050_EXT_SENS_DATA_17   0x5A   // R  
+#define MPU6050_EXT_SENS_DATA_18   0x5B   // R  
+#define MPU6050_EXT_SENS_DATA_19   0x5C   // R  
+#define MPU6050_EXT_SENS_DATA_20   0x5D   // R  
+#define MPU6050_EXT_SENS_DATA_21   0x5E   // R  
+#define MPU6050_EXT_SENS_DATA_22   0x5F   // R  
+#define MPU6050_EXT_SENS_DATA_23   0x60   // R  
+#define MPU6050_MOT_DETECT_STATUS  0x61   // R  
+#define MPU6050_I2C_SLV0_DO        0x63   // R/W
+#define MPU6050_I2C_SLV1_DO        0x64   // R/W
+#define MPU6050_I2C_SLV2_DO        0x65   // R/W
+#define MPU6050_I2C_SLV3_DO        0x66   // R/W
+#define MPU6050_I2C_MST_DELAY_CTRL 0x67   // R/W
+#define MPU6050_SIGNAL_PATH_RESET  0x68   // R/W
+#define MPU6050_MOT_DETECT_CTRL    0x69   // R/W
+#define MPU6050_USER_CTRL          0x6A   // R/W
+#define MPU6050_PWR_MGMT_1         0x6B   // R/W
+#define MPU6050_PWR_MGMT_2         0x6C   // R/W
+#define MPU6050_FIFO_COUNTH        0x72   // R/W
+#define MPU6050_FIFO_COUNTL        0x73   // R/W
+#define MPU6050_FIFO_R_W           0x74   // R/W
+#define MPU6050_WHO_AM_I           0x75   // R
+ 
+ 
+// Defines for the bits, to be able to change
+// between bit number and binary definition.
+// By using the bit number, programming the sensor
+// is like programming the AVR microcontroller.
+// But instead of using "(1&lt;<x)", or="" "_bv(x)",="" the="" arduino="" "bit(x)"="" is="" used.="" #define="" mpu6050_d0="" 0="" mpu6050_d1="" 1="" mpu6050_d2="" 2="" mpu6050_d3="" 3="" mpu6050_d4="" 4="" mpu6050_d5="" 5="" mpu6050_d6="" 6="" mpu6050_d7="" 7="" aux_vddio="" register="" mpu6050_aux_vddio="" i2c="" high:="" config="" dlpf="" digital="" low="" pass="" filter="" for="" both="" gyro="" and="" accelerometers.="" these="" are="" names="" bits.="" use="" only="" with="" bit()="" macro.="" mpu6050_dlpf_cfg0="" mpu6050_dlpf_cfg1="" mpu6050_dlpf_cfg2="" mpu6050_ext_sync_set0="" mpu6050_ext_sync_set1="" mpu6050_ext_sync_set2="" combined="" definitions="" ext_sync_set="" values="" mpu6050_ext_sync_set_0="" (0)="" mpu6050_ext_sync_set_1="" (bit(mpu6050_ext_sync_set0))="" mpu6050_ext_sync_set_2="" (bit(mpu6050_ext_sync_set1))="" mpu6050_ext_sync_set_3="" (bit(mpu6050_ext_sync_set1)|bit(mpu6050_ext_sync_set0))="" mpu6050_ext_sync_set_4="" (bit(mpu6050_ext_sync_set2))="" mpu6050_ext_sync_set_5="" (bit(mpu6050_ext_sync_set2)|bit(mpu6050_ext_sync_set0))="" mpu6050_ext_sync_set_6="" (bit(mpu6050_ext_sync_set2)|bit(mpu6050_ext_sync_set1))="" mpu6050_ext_sync_set_7="" (bit(mpu6050_ext_sync_set2)|bit(mpu6050_ext_sync_set1)|bit(mpu6050_ext_sync_set0))="" alternative="" definitions.="" mpu6050_ext_sync_disabled="" mpu6050_ext_sync_temp_out_l="" mpu6050_ext_sync_gyro_xout_l="" mpu6050_ext_sync_gyro_yout_l="" mpu6050_ext_sync_gyro_zout_l="" mpu6050_ext_sync_accel_xout_l="" mpu6050_ext_sync_accel_yout_l="" mpu6050_ext_sync_accel_zout_l="" dlpf_cfg="" mpu6050_dlpf_cfg_0="" mpu6050_dlpf_cfg_1="" (bit(mpu6050_dlpf_cfg0))="" mpu6050_dlpf_cfg_2="" (bit(mpu6050_dlpf_cfg1))="" mpu6050_dlpf_cfg_3="" (bit(mpu6050_dlpf_cfg1)|bit(mpu6050_dlpf_cfg0))="" mpu6050_dlpf_cfg_4="" (bit(mpu6050_dlpf_cfg2))="" mpu6050_dlpf_cfg_5="" (bit(mpu6050_dlpf_cfg2)|bit(mpu6050_dlpf_cfg0))="" mpu6050_dlpf_cfg_6="" (bit(mpu6050_dlpf_cfg2)|bit(mpu6050_dlpf_cfg1))="" mpu6050_dlpf_cfg_7="" (bit(mpu6050_dlpf_cfg2)|bit(mpu6050_dlpf_cfg1)|bit(mpu6050_dlpf_cfg0))="" this="" name="" uses="" bandwidth="" (hz)="" accelometer,="" almost="" same.="" mpu6050_dlpf_260hz="" mpu6050_dlpf_184hz="" mpu6050_dlpf_94hz="" mpu6050_dlpf_44hz="" mpu6050_dlpf_21hz="" mpu6050_dlpf_10hz="" mpu6050_dlpf_5hz="" mpu6050_dlpf_reserved="" gyro_config="" xg_st,="" yg_st,="" zg_st="" bits="" selftest.="" fs_sel="" sets="" range="" gyro.="" mpu6050_fs_sel0="" mpu6050_fs_sel1="" mpu6050_zg_st="" mpu6050_yg_st="" mpu6050_xg_st="" mpu6050_fs_sel_0="" mpu6050_fs_sel_1="" (bit(mpu6050_fs_sel0))="" mpu6050_fs_sel_2="" (bit(mpu6050_fs_sel1))="" mpu6050_fs_sel_3="" (bit(mpu6050_fs_sel1)|bit(mpu6050_fs_sel0))="" in="" degrees="" per="" second.="" mpu6050_fs_sel_250="" mpu6050_fs_sel_500="" mpu6050_fs_sel_1000="" mpu6050_fs_sel_2000="" accel_config="" xa_st,="" ya_st,="" za_st="" afs_sel="" accelerometer.="" mpu6050_accel_hpf0="" mpu6050_accel_hpf1="" mpu6050_accel_hpf2="" mpu6050_afs_sel0="" mpu6050_afs_sel1="" mpu6050_za_st="" mpu6050_ya_st="" mpu6050_xa_st="" accel_hpf="" mpu6050_accel_hpf_0="" mpu6050_accel_hpf_1="" (bit(mpu6050_accel_hpf0))="" mpu6050_accel_hpf_2="" (bit(mpu6050_accel_hpf1))="" mpu6050_accel_hpf_3="" (bit(mpu6050_accel_hpf1)|bit(mpu6050_accel_hpf0))="" mpu6050_accel_hpf_4="" (bit(mpu6050_accel_hpf2))="" mpu6050_accel_hpf_7="" (bit(mpu6050_accel_hpf2)|bit(mpu6050_accel_hpf1)|bit(mpu6050_accel_hpf0))="" cut-off="" frequency.="" mpu6050_accel_hpf_reset="" mpu6050_accel_hpf_5hz="" mpu6050_accel_hpf_2_5hz="" mpu6050_accel_hpf_1_25hz="" mpu6050_accel_hpf_0_63hz="" mpu6050_accel_hpf_hold="" mpu6050_afs_sel_0="" mpu6050_afs_sel_1="" (bit(mpu6050_afs_sel0))="" mpu6050_afs_sel_2="" (bit(mpu6050_afs_sel1))="" mpu6050_afs_sel_3="" (bit(mpu6050_afs_sel1)|bit(mpu6050_afs_sel0))="" full="" scale="" mpu6050_afs_sel_2g="" mpu6050_afs_sel_4g="" mpu6050_afs_sel_8g="" mpu6050_afs_sel_16g="" fifo_en="" mpu6050_slv0_fifo_en="" mpu6050_slv1_fifo_en="" mpu6050_slv2_fifo_en="" mpu6050_accel_fifo_en="" mpu6050_zg_fifo_en="" mpu6050_yg_fifo_en="" mpu6050_xg_fifo_en="" mpu6050_temp_fifo_en="" i2c_mst_ctrl="" mpu6050_i2c_mst_clk0="" mpu6050_i2c_mst_clk1="" mpu6050_i2c_mst_clk2="" mpu6050_i2c_mst_clk3="" mpu6050_i2c_mst_p_nsr="" mpu6050_slv_3_fifo_en="" mpu6050_wait_for_es="" mpu6050_mult_mst_en="" i2c_mst_clk="" mpu6050_i2c_mst_clk_0="" mpu6050_i2c_mst_clk_1="" (bit(mpu6050_i2c_mst_clk0))="" mpu6050_i2c_mst_clk_2="" (bit(mpu6050_i2c_mst_clk1))="" mpu6050_i2c_mst_clk_3="" (bit(mpu6050_i2c_mst_clk1)|bit(mpu6050_i2c_mst_clk0))="" mpu6050_i2c_mst_clk_4="" (bit(mpu6050_i2c_mst_clk2))="" mpu6050_i2c_mst_clk_5="" (bit(mpu6050_i2c_mst_clk2)|bit(mpu6050_i2c_mst_clk0))="" mpu6050_i2c_mst_clk_6="" (bit(mpu6050_i2c_mst_clk2)|bit(mpu6050_i2c_mst_clk1))="" mpu6050_i2c_mst_clk_7="" (bit(mpu6050_i2c_mst_clk2)|bit(mpu6050_i2c_mst_clk1)|bit(mpu6050_i2c_mst_clk0))="" mpu6050_i2c_mst_clk_8="" (bit(mpu6050_i2c_mst_clk3))="" mpu6050_i2c_mst_clk_9="" (bit(mpu6050_i2c_mst_clk3)|bit(mpu6050_i2c_mst_clk0))="" mpu6050_i2c_mst_clk_10="" (bit(mpu6050_i2c_mst_clk3)|bit(mpu6050_i2c_mst_clk1))="" mpu6050_i2c_mst_clk_11="" (bit(mpu6050_i2c_mst_clk3)|bit(mpu6050_i2c_mst_clk1)|bit(mpu6050_i2c_mst_clk0))="" mpu6050_i2c_mst_clk_12="" (bit(mpu6050_i2c_mst_clk3)|bit(mpu6050_i2c_mst_clk2))="" mpu6050_i2c_mst_clk_13="" (bit(mpu6050_i2c_mst_clk3)|bit(mpu6050_i2c_mst_clk2)|bit(mpu6050_i2c_mst_clk0))="" mpu6050_i2c_mst_clk_14="" (bit(mpu6050_i2c_mst_clk3)|bit(mpu6050_i2c_mst_clk2)|bit(mpu6050_i2c_mst_clk1))="" mpu6050_i2c_mst_clk_15="" (bit(mpu6050_i2c_mst_clk3)|bit(mpu6050_i2c_mst_clk2)|bit(mpu6050_i2c_mst_clk1)|bit(mpu6050_i2c_mst_clk0))="" master="" clock="" speed="" khz.="" mpu6050_i2c_mst_clk_348khz="" mpu6050_i2c_mst_clk_333khz="" mpu6050_i2c_mst_clk_320khz="" mpu6050_i2c_mst_clk_308khz="" mpu6050_i2c_mst_clk_296khz="" mpu6050_i2c_mst_clk_286khz="" mpu6050_i2c_mst_clk_276khz="" mpu6050_i2c_mst_clk_267khz="" mpu6050_i2c_mst_clk_258khz="" mpu6050_i2c_mst_clk_500khz="" mpu6050_i2c_mst_clk_471khz="" mpu6050_i2c_mst_clk_444khz="" mpu6050_i2c_mst_clk_421khz="" mpu6050_i2c_mst_clk_400khz="" mpu6050_i2c_mst_clk_381khz="" mpu6050_i2c_mst_clk_364khz="" i2c_slv0_addr="" mpu6050_i2c_slv0_rw="" i2c_slv0_ctrl="" mpu6050_i2c_slv0_len0="" mpu6050_i2c_slv0_len1="" mpu6050_i2c_slv0_len2="" mpu6050_i2c_slv0_len3="" mpu6050_i2c_slv0_grp="" mpu6050_i2c_slv0_reg_dis="" mpu6050_i2c_slv0_byte_sw="" mpu6050_i2c_slv0_en="" a="" mask="" length="" mpu6050_i2c_slv0_len_mask="" 0x0f="" i2c_slv1_addr="" mpu6050_i2c_slv1_rw="" i2c_slv1_ctrl="" mpu6050_i2c_slv1_len0="" mpu6050_i2c_slv1_len1="" mpu6050_i2c_slv1_len2="" mpu6050_i2c_slv1_len3="" mpu6050_i2c_slv1_grp="" mpu6050_i2c_slv1_reg_dis="" mpu6050_i2c_slv1_byte_sw="" mpu6050_i2c_slv1_en="" mpu6050_i2c_slv1_len_mask="" i2c_slv2_addr="" mpu6050_i2c_slv2_rw="" i2c_slv2_ctrl="" mpu6050_i2c_slv2_len0="" mpu6050_i2c_slv2_len1="" mpu6050_i2c_slv2_len2="" mpu6050_i2c_slv2_len3="" mpu6050_i2c_slv2_grp="" mpu6050_i2c_slv2_reg_dis="" mpu6050_i2c_slv2_byte_sw="" mpu6050_i2c_slv2_en="" mpu6050_i2c_slv2_len_mask="" i2c_slv3_addr="" mpu6050_i2c_slv3_rw="" i2c_slv3_ctrl="" mpu6050_i2c_slv3_len0="" mpu6050_i2c_slv3_len1="" mpu6050_i2c_slv3_len2="" mpu6050_i2c_slv3_len3="" mpu6050_i2c_slv3_grp="" mpu6050_i2c_slv3_reg_dis="" mpu6050_i2c_slv3_byte_sw="" mpu6050_i2c_slv3_en="" mpu6050_i2c_slv3_len_mask="" i2c_slv4_addr="" mpu6050_i2c_slv4_rw="" i2c_slv4_ctrl="" mpu6050_i2c_mst_dly0="" mpu6050_i2c_mst_dly1="" mpu6050_i2c_mst_dly2="" mpu6050_i2c_mst_dly3="" mpu6050_i2c_mst_dly4="" mpu6050_i2c_slv4_reg_dis="" mpu6050_i2c_slv4_int_en="" mpu6050_i2c_slv4_en="" delay="" mpu6050_i2c_mst_dly_mask="" 0x1f="" i2c_mst_status="" mpu6050_i2c_slv0_nack="" mpu6050_i2c_slv1_nack="" mpu6050_i2c_slv2_nack="" mpu6050_i2c_slv3_nack="" mpu6050_i2c_slv4_nack="" mpu6050_i2c_lost_arb="" mpu6050_i2c_slv4_done="" mpu6050_pass_through="" i2c_pin_cfg="" mpu6050_clkout_en="" mpu6050_i2c_bypass_en="" mpu6050_fsync_int_en="" mpu6050_fsync_int_level="" mpu6050_int_rd_clear="" mpu6050_latch_int_en="" mpu6050_int_open="" mpu6050_int_level="" int_enable="" mpu6050_data_rdy_en="" mpu6050_i2c_mst_int_en="" mpu6050_fifo_oflow_en="" mpu6050_zmot_en="" mpu6050_mot_en="" mpu6050_ff_en="" int_status="" mpu6050_data_rdy_int="" mpu6050_i2c_mst_int="" mpu6050_fifo_oflow_int="" mpu6050_zmot_int="" mpu6050_mot_int="" mpu6050_ff_int="" mot_detect_status="" mpu6050_mot_zrmot="" mpu6050_mot_zpos="" mpu6050_mot_zneg="" mpu6050_mot_ypos="" mpu6050_mot_yneg="" mpu6050_mot_xpos="" mpu6050_mot_xneg="" ic2_mst_delay_ctrl="" mpu6050_i2c_slv0_dly_en="" mpu6050_i2c_slv1_dly_en="" mpu6050_i2c_slv2_dly_en="" mpu6050_i2c_slv3_dly_en="" mpu6050_i2c_slv4_dly_en="" mpu6050_delay_es_shadow="" signal_path_reset="" mpu6050_temp_reset="" mpu6050_accel_reset="" mpu6050_gyro_reset="" mot_detect_ctrl="" mpu6050_mot_count0="" mpu6050_mot_count1="" mpu6050_ff_count0="" mpu6050_ff_count1="" mpu6050_accel_on_delay0="" mpu6050_accel_on_delay1="" mot_count="" mpu6050_mot_count_0="" mpu6050_mot_count_1="" (bit(mpu6050_mot_count0))="" mpu6050_mot_count_2="" (bit(mpu6050_mot_count1))="" mpu6050_mot_count_3="" (bit(mpu6050_mot_count1)|bit(mpu6050_mot_count0))="" mpu6050_mot_count_reset="" ff_count="" mpu6050_ff_count_0="" mpu6050_ff_count_1="" (bit(mpu6050_ff_count0))="" mpu6050_ff_count_2="" (bit(mpu6050_ff_count1))="" mpu6050_ff_count_3="" (bit(mpu6050_ff_count1)|bit(mpu6050_ff_count0))="" mpu6050_ff_count_reset="" accel_on_delay="" mpu6050_accel_on_delay_0="" mpu6050_accel_on_delay_1="" (bit(mpu6050_accel_on_delay0))="" mpu6050_accel_on_delay_2="" (bit(mpu6050_accel_on_delay1))="" mpu6050_accel_on_delay_3="" (bit(mpu6050_accel_on_delay1)|bit(mpu6050_accel_on_delay0))="" mpu6050_accel_on_delay_0ms="" mpu6050_accel_on_delay_1ms="" mpu6050_accel_on_delay_2ms="" mpu6050_accel_on_delay_3ms="" user_ctrl="" mpu6050_sig_cond_reset="" mpu6050_i2c_mst_reset="" mpu6050_fifo_reset="" mpu6050_i2c_if_dis="" must="" be="" mpu-6050="" mpu6050_i2c_mst_en="" mpu6050_fifo_en="" pwr_mgmt_1="" mpu6050_clksel0="" mpu6050_clksel1="" mpu6050_clksel2="" mpu6050_temp_dis="" 1:="" disable="" temperature="" sensor="" mpu6050_cycle="" sample="" sleep="" mpu6050_sleep="" mode="" mpu6050_device_reset="" reset="" to="" default="" clksel="" mpu6050_clksel_0="" mpu6050_clksel_1="" (bit(mpu6050_clksel0))="" mpu6050_clksel_2="" (bit(mpu6050_clksel1))="" mpu6050_clksel_3="" (bit(mpu6050_clksel1)|bit(mpu6050_clksel0))="" mpu6050_clksel_4="" (bit(mpu6050_clksel2))="" mpu6050_clksel_5="" (bit(mpu6050_clksel2)|bit(mpu6050_clksel0))="" mpu6050_clksel_6="" (bit(mpu6050_clksel2)|bit(mpu6050_clksel1))="" mpu6050_clksel_7="" (bit(mpu6050_clksel2)|bit(mpu6050_clksel1)|bit(mpu6050_clksel0))="" mpu6050_clksel_internal="" mpu6050_clksel_x="" mpu6050_clksel_y="" mpu6050_clksel_z="" mpu6050_clksel_ext_32khz="" mpu6050_clksel_ext_19_2mhz="" mpu6050_clksel_reserved="" mpu6050_clksel_stop="" pwr_mgmt_2="" mpu6050_stby_zg="" mpu6050_stby_yg="" mpu6050_stby_xg="" mpu6050_stby_za="" mpu6050_stby_ya="" mpu6050_stby_xa="" mpu6050_lp_wake_ctrl0="" mpu6050_lp_wake_ctrl1="" lp_wake_ctrl="" mpu6050_lp_wake_ctrl_0="" mpu6050_lp_wake_ctrl_1="" (bit(mpu6050_lp_wake_ctrl0))="" mpu6050_lp_wake_ctrl_2="" (bit(mpu6050_lp_wake_ctrl1))="" mpu6050_lp_wake_ctrl_3="" (bit(mpu6050_lp_wake_ctrl1)|bit(mpu6050_lp_wake_ctrl0))="" wake-up="" mpu6050_lp_wake_1_25hz="" mpu6050_lp_wake_2_5hz="" mpu6050_lp_wake_5hz="" mpu6050_lp_wake_10hz="" address="" 0x68.="" but="" if="" ad0="" pin="" low.="" some="" boards="" have="" high,="" thus="" becomes="" 0x69.="" mpu6050_i2c_address="" 0x68="" declaring="" an="" union="" registers="" axis="" values.="" byte="" order="" does="" not="" match="" of="" compiler="" avr="" chip.="" chip="" (on="" board)="" has="" at="" lower="" address.="" different="" order:="" high="" address,="" so="" that="" corrected.="" part="" "reg"="" used="" internally,="" swapped="" code.="" typedef="" accel_t_gyro_union="" {="" struct="" uint8_t="" x_accel_h;="" x_accel_l;="" y_accel_h;="" y_accel_l;="" z_accel_h;="" z_accel_l;="" t_h;="" t_l;="" x_gyro_h;="" x_gyro_l;="" y_gyro_h;="" y_gyro_l;="" z_gyro_h;="" z_gyro_l;="" }="" reg;="" int16_t="" x_accel;="" y_accel;="" z_accel;="" temperature;="" x_gyro;="" y_gyro;="" z_gyro;="" value;="" };="" void="" setup()="" int="" error;="" c;="" serial.begin(115200);="" serial.println(f("invensense="" mpu-6050"));="" serial.println(f("june="" 2012"));="" initialize="" 'wire'="" class="" i2c-bus.="" wire.begin();="" power-up:="" 250="" second="" acceleration="" 2g="" source="" internal="" 8mhz="" device="" mode.="" error="MPU6050_read" (mpu6050_who_am_i,="" &#038;c,="" 1);="" serial.print(f("who_am_i="" :="" "));="" serial.print(c,hex);="" serial.print(f(",="" read="" accel,="" temp="" gyro,="" accel="" x,y,z:="" serial.print(accel_t_gyro.value.x_accel,="" dec);="" serial.print(f(","));="" serial.print(accel_t_gyro.value.y_accel,="" serial.println(accel_t_gyro.value.z_accel,="" serial.print(xval,="" serial.print(yval,="" serial.println(zval,="" -40="" +85="" celsius.="" it="" signed="" integer.="" according="" datasheet:="" 340="" celsius,="" -512="" 35="" degrees.="" degrees:="" -="" (340="" *="" 35)="-12412" serial.print(f("temperature:="" dt="(" (double)="" accel_t_gyro.value.temperature="" +="" 12412.0)="" 340.0;="" serial.print(dt,="" 3);="" serial.print(f("="" celsius"));="" serial.println(f(""));="" print="" raw="" serial.print(f("gyro="" x,y,z="" serial.print(accel_t_gyro.value.x_gyro,="" serial.print(accel_t_gyro.value.y_gyro,="" serial.print(accel_t_gyro.value.z_gyro,="" delay(1);="" --------------------------------------------------------="" mpu6050_read="" common="" function="" multiple="" bytes="" from="" device.="" boolean="" parameter="" wire.endtransmission()="" able="" hold="" release="" implemented="" 1.0.1.="" read.="" there="" no="" single="" byte.="" mpu6050_read(int="" start,="" *buffer,="" size)="" i,="" n,="" wire.begintransmission(mpu6050_i2c_address);="" n="Wire.write(start);" (n="" !="1)" return="" (-10);="" i2c-bus="" (n);="" third="" true:="" relase="" after="" data="" wire.requestfrom(mpu6050_i2c_address,="" size,="" true);="" i="0;" while(wire.available()="" &#038;&#038;="" i<size)="" buffer[i++]="Wire.read();" (="" (-11);="" (0);="" mpu6050_write="" write="" written,="" mpu_6050_write_reg().="" parameters:="" start="" define="" pdata="" pointer="" write.="" size="" number="" used,="" byte:="" (mpu6050_pwr_mgmt_1,="" mpu6050_write(int="" const="" *pdata,="" (-20);="" size);="" (-21);="" (error="" (error);="" mpu6050_write_reg="" extra="" register.="" just="" wrapper="" around="" mpu_6050_write()="" function,="" convenient="" make="" easier="" mpu6050_write_reg(int="" reg,="" data)="" &#038;data,="" <="" code=""></x)",></wire.h></code></pre><code>
+					  </code></div><!-- .entry-content --><code>
+          
+        </code></article><code>
+        
+		<div id="comments">
+	
+	
+									<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://odisharkins.com/robotics/gyro-arduino-processing/#respond" style="display:none;">Cancel</a></small></h3>
+									<form action="http://odisharkins.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																										<p>
+                  <label for="author">Your Name (required)</label>
+									<input id="author" name="author" placeholder="Name" size="" type="text"></p>
+<p>
+                  <label for="email">Your Email (required)</label>
+									<input id="email" name="email" placeholder="Email" size="" type="text"></p>
+<p>
+                  <label for="url">Your Website</label>
+									<input id="url" name="url" placeholder="Website" size="" type="text">
+									</p>
+												<p class="comment-form-comment"><label for="comment">Comment</label><textarea placeholder="Type your comment here" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>												<p class="form-submit">
+							<input name="submit" id="submit" value="Post Comment" type="submit">
+							<input name="comment_post_ID" value="1291" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+						</p>
+											</form>
+							</div><!-- #respond -->
+				
+</div><!-- #comments -->
+        
+      </code></div><!-- .block-inner --><code>
+	     </code></div><!-- .main-content --><code>
+    
+	<div class="primary-sidebar column col4">
+	<aside id="text-3" class="widget_text block-background block-inner widget sidebar-right-background">			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-3923476792925977";
+/* odisharkins.com */
+google_ad_slot = "7051859762";
+google_ad_width = 250;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/show_ads.js">
+</script></div>
+		</aside><aside id="text-2" class="widget_text block-background block-inner widget sidebar-right-background">			<div class="textwidget"><div><a href="http://oharkins.arealbreakthrough.com/" target="_blank"><img class="xxfboofotwwzbqbwgzdq" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/300x250_opp_final.jpg"></a></div></div>
+		</aside>		<aside id="recent-posts-2" class="widget_recent_entries block-background block-inner widget sidebar-right-background">		<h4 class="widget-title">Recent Posts</h4>		<ul>
+					<li>
+				<a href="http://odisharkins.com/nerium-ad-featured-on-refinery29/">Nerium AD featured on Refinery29!!</a>
+						</li>
+					<li>
+				<a href="http://odisharkins.com/when-did-not-giving-a-care-about-peoples-time-become-a-social-standard/">When did not giving a care about peoples time become a social standard?</a>
+						</li>
+					<li>
+				<a href="http://odisharkins.com/why-i-started-my-own-business-in-cosmetics/">Why I Started My Own Business in Cosmetics</a>
+						</li>
+					<li>
+				<a href="http://odisharkins.com/real-america-tv/">Real America TV</a>
+						</li>
+					<li>
+				<a href="http://odisharkins.com/second-amendment-symposium/">Second Amendment Symposium</a>
+						</li>
+				</ul>
+		</aside><aside id="text-5" class="widget_text block-background block-inner widget sidebar-right-background">			<div class="textwidget"><a href="http://referrals.trhou.se/odisharkins" target="_blank"><img src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/referral-badge-green.png"></a></div>
+		</aside><aside id="archives-2" class="widget_archive block-background block-inner widget sidebar-right-background"><h4 class="widget-title">Archives</h4>		<ul>
+	<li><a href="http://odisharkins.com/2014/06/">June 2014</a></li>
+	<li><a href="http://odisharkins.com/2014/05/">May 2014</a></li>
+	<li><a href="http://odisharkins.com/2014/03/">March 2014</a></li>
+	<li><a href="http://odisharkins.com/2014/02/">February 2014</a></li>
+	<li><a href="http://odisharkins.com/2014/01/">January 2014</a></li>
+	<li><a href="http://odisharkins.com/2013/11/">November 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/09/">September 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/08/">August 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/07/">July 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/06/">June 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/05/">May 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/04/">April 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/03/">March 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/02/">February 2013</a></li>
+	<li><a href="http://odisharkins.com/2013/01/">January 2013</a></li>
+	<li><a href="http://odisharkins.com/2012/12/">December 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/11/">November 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/10/">October 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/09/">September 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/08/">August 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/07/">July 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/06/">June 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/05/">May 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/04/">April 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/03/">March 2012</a></li>
+	<li><a href="http://odisharkins.com/2012/02/">February 2012</a></li>
+		</ul>
+</aside><aside id="categories-2" class="widget_categories block-background block-inner widget sidebar-right-background"><h4 class="widget-title">Categories</h4>		<ul>
+	<li class="cat-item cat-item-13"><a href="http://odisharkins.com/category/atf/">ATF</a>
+</li>
+	<li class="cat-item cat-item-110"><a href="http://odisharkins.com/category/communication/">Communication</a>
+</li>
+	<li class="cat-item cat-item-37"><a href="http://odisharkins.com/category/devotionals/">Devotionals</a>
+</li>
+	<li class="cat-item cat-item-85"><a href="http://odisharkins.com/category/education/">Education</a>
+</li>
+	<li class="cat-item cat-item-53"><a href="http://odisharkins.com/category/honor-academy/">Honor Academy</a>
+</li>
+	<li class="cat-item cat-item-72"><a href="http://odisharkins.com/category/missions/">Missions</a>
+</li>
+	<li class="cat-item cat-item-125"><a href="http://odisharkins.com/category/nerium/">Nerium</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="http://odisharkins.com/category/politics/">Politics</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://odisharkins.com/category/real-america-tv/">Real America TV</a>
+</li>
+	<li class="cat-item cat-item-108"><a href="http://odisharkins.com/category/reflections/">Reflections</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://odisharkins.com/category/regent-university/">Regent University</a>
+</li>
+	<li class="cat-item cat-item-95"><a href="http://odisharkins.com/category/robotics/">Robotics</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://odisharkins.com/category/technology/">Technology</a>
+</li>
+	<li class="cat-item cat-item-92"><a href="http://odisharkins.com/category/ted-2/">TED</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="http://odisharkins.com/category/trailer-club/">Trailer Club</a>
+</li>
+	<li class="cat-item cat-item-65"><a href="http://odisharkins.com/category/travel/">Travel</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://odisharkins.com/category/uncategorized/">Uncategorized</a>
+</li>
+		</ul>
+</aside><aside id="text-4" class="widget_text block-background block-inner widget sidebar-right-background">			<div class="textwidget"><a href="http://themeforest.net/?ref=oharkins"><img class="xxfboofotwwzbqbwgzdq" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/336x280_V3.jpg"></a></div>
+		</aside></div><!-- .primary-sidebar -->    
+  </code></div><code>
+  
+</code></div><code>
+
+<!-- Progress bar for supersized -->
+<div class="progress-wrapper bottom">
+  <div style="left: -1343px;" class="progress-bar"></div>
+</div>
+
+<footer class="footer-section container static">
+  <div class="row">
+        
+      <div class="soc-net social-links">
+
+    <a class="rss" href="http://odisharkins.com/feed/">
+    <i class="icon-rss"></i></a>
+    
+          <a class="facebook" href="https://www.facebook.com/odis.harkins"><i class="icon-facebook"></i></a>
+      
+            <a class="twitter" href="https://twitter.com/oharkins"><i class="icon-twitter"></i></a>
+          
+          <a class="google" href="https://plus.google.com/u/0/+OdisHarkins/about"><i class="icon-google"></i></a>
+              
+        
+          
+        
+          <a class="linked" href="http://www.linkedin.com/pub/odis-harkins/44/605/570"><i class="icon-linkedin"></i></a>
+          
+        
+        
+        
+        
+        
+          </div>
+    
+    <div class="copyrights"><p>© 2014 <a href="http://harkinstech.com/">Harkins Tech</a> All Rights Reserved</p></div>
+  </div>
+</footer><!-- .footer-section -->
+
+<script type="text/javascript" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/comment-reply.js"></script>
+
+</code><ul style="visibility: visible;" class="quality" id="supersized"><li class="slide-0 prevslide"><a target="_blank"><img style="width: 1343px; height: 899.81px; left: 0px; top: -133px;" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/297354_2418463909337_992741102_n.jpg"></a></li><li class="slide-1"><a target="_blank"><img style="width: 1343px; left: 0px; top: -186.5px; height: 1007.25px;" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/2014-02-16-19.jpg"></a></li><li class="slide-2"></li><li class="slide-3"></li><li class="slide-4"></li><li class="slide-5"></li><li class="slide-6"></li><li style="visibility: visible; opacity: 1;" class="slide-7 activeslide"><a target="_blank"><img style="width: 634px; left: 354.5px; top: 0px; height: 634px;" src="Gyro%20+%20Arduino%20+%20Processing%20_%20Odis%20Harkins%20_%20All%20for%20Him%20and%20For%20His%20Glory_arquivos/2014-01-23-20.jpg"></a></li><div class="supersized-pattern"></div></ul><div id="fancybox-tmp"></div><div id="fancybox-loading"><div></div></div><div id="fancybox-overlay"></div><div id="fancybox-wrap"><div id="fancybox-outer"><div class="fancybox-bg" id="fancybox-bg-n"></div><div class="fancybox-bg" id="fancybox-bg-ne"></div><div class="fancybox-bg" id="fancybox-bg-e"></div><div class="fancybox-bg" id="fancybox-bg-se"></div><div class="fancybox-bg" id="fancybox-bg-s"></div><div class="fancybox-bg" id="fancybox-bg-sw"></div><div class="fancybox-bg" id="fancybox-bg-w"></div><div class="fancybox-bg" id="fancybox-bg-nw"></div><div id="fancybox-content"></div><a id="fancybox-close"></a><div id="fancybox-title"></div><a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"><i class="icon-arrow-left"></i></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"><i class="icon-arrow-right"></i></span></a></div></div><div class="loading-box">Loading...</div></body></html>
