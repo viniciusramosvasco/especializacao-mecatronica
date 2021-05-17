@@ -4,8 +4,8 @@ EasyTransfer ET;
 
 struct rovData
 {
-  int motor1;
-  int motor2;
+  int RSYVal;
+  int RSXVal;
   int motor3;
   int relay1;
   int relay2;
@@ -13,16 +13,15 @@ struct rovData
 
 /*
 int LPWM_Output = 8;
-int RPWM_Output = 9;
-int LPWM2_Output = 6;
-int RPWM2_Output = 7;
-int LPWM3_Output = 3;
-int RPWM3_Output = 5;
-*/
+ int RPWM_Output = 9;
+ int LPWM2_Output = 6;
+ int RPWM2_Output = 7;
+ int LPWM3_Output = 3;
+ int RPWM3_Output = 5;
+ */
 int RSYVal = 0;
+int RSXVal = 0;
 int LSYVal = 0;
-int TRIANGLE = 0;
-int CROSS = 0;
 
 int motor_speed = 12;
 int motor_speed_2 = 11;
@@ -45,14 +44,14 @@ void setup()
 {
   Serial.begin(9600); 
   ET.begin(details(data), &Serial);
-/*
+  /*
   pinMode(LPWM_Output, OUTPUT);
-  pinMode(RPWM_Output, OUTPUT);
-  pinMode(LPWM2_Output, OUTPUT);
-  pinMode(RPWM2_Output, OUTPUT);
-  pinMode(LPWM3_Output, OUTPUT);
-  pinMode(RPWM3_Output, OUTPUT);
-*/
+   pinMode(RPWM_Output, OUTPUT);
+   pinMode(LPWM2_Output, OUTPUT);
+   pinMode(RPWM2_Output, OUTPUT);
+   pinMode(LPWM3_Output, OUTPUT);
+   pinMode(RPWM3_Output, OUTPUT);
+   */
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
   pinMode(led3, OUTPUT);
@@ -71,101 +70,154 @@ void loop()
     lastComCheck = millis();
     interval = 1000;
 
-    //motor1
-    if(data.motor1 < 100){       // Sentido Direto            
-      /*Serial.println("BIT: ");
-      Serial.println(RSYVal, DEC);*/
-      int motor_speed = map(data.motor1,0,99,99,0);
-      /*Serial.println("RIGHT MOTOR FORWARD: ");*/
+    //Movimentação para frente
+    if(data.RSYVal < 100){
+      int motor_speed = map(data.RSYVal,0,99,99,0);
+      int motor_speed_2 = map(data.RSYVal,0,99,99,0);
       Serial.println(motor_speed, DEC);
-      digitalWrite(led1, LOW);    
-      byte brightness;     
-      brightness = motor_speed;
-      analogWrite(led1, brightness);
-
-      /*int forwardPWM = motor_speed;
-      analogWrite(LPWM_Output, forwardPWM);
-      analogWrite(RPWM_Output, 0);*/    
-    }
-
-    else if(data.motor1 >= 100 && data.motor1 < 156){
-      motor_speed = 0;
-      Serial.println(motor_speed, DEC);
-      digitalWrite(led1, LOW);
-      //    Serial.println("Analogico na posicao Neutra!!");
-    }
-
-    else{                                        // Sentido Reverso
-      /*Serial.println("BIT: "); 
-      Serial.println(RSYVal, DEC);*/ //analógico direito
-      int motor_speed = map(data.motor1,156,255,0,99);
-      /*Serial.println("RIGHT MOTOR REVERSE: ");*/
-      Serial.println(motor_speed, DEC);
-      digitalWrite(led1, LOW);    
-      byte brightness;     
-      brightness = motor_speed;
-      analogWrite(led1, brightness);
-
-      /*int reversePWM = motor_speed;
-      analogWrite(LPWM_Output, 0);
-      analogWrite(RPWM_Output, reversePWM);*/              
-    }
-
-
-    //motor2
-    if(data.motor2 < 100){       // Sentido Direto            
-      /*Serial.println("BIT: "); 
-      Serial.println(data.motor2, DEC);*/
-      int motor_speed_2 = map(data.motor2,0,99,99,0);
-      /*Serial.println("LEFT MOTOR FORWARD: ");*/
+      Serial.println("\t");
       Serial.println(motor_speed_2, DEC);
-      digitalWrite(led2, LOW);    
-      byte brightness_2;     
+      digitalWrite(led1, LOW);    
+      digitalWrite(led2, LOW);
+      byte brightness;
+      byte brightness_2;
+      brightness = motor_speed;
       brightness_2 = motor_speed_2;
+      analogWrite(led1, brightness);
       analogWrite(led2, brightness_2);
-
-
-      /*int forwardPWM2 = motor_speed_2;
-      analogWrite(LPWM2_Output, forwardPWM2);
-      analogWrite(RPWM2_Output, 0);*/    
+      /*int forwardPWM = motor_speed;
+       int forwardPWM_2 = motor_speed_2;
+       analogWrite(LPWM_Output, forwardPWM);
+       analogWrite(LPWM_Output_2, forwardPWM_2);
+       analogWrite(RPWM_Output, 0);
+       analogWrite(RPWM_Output_2, 0);
+       */
     }
-
-    else if(data.motor2 >= 100 && data.motor2 < 156){
+    // Parado
+    else if(data.RSYVal >= 100 && data.RSYVal < 156){
+      motor_speed = 0;
       motor_speed_2 = 0;
+      Serial.println(motor_speed, DEC);
+      Serial.println("\t");
       Serial.println(motor_speed_2, DEC);
+      digitalWrite(led1, LOW);
       digitalWrite(led2, LOW);
       //    Serial.println("Analogico na posicao Neutra!!");
     }
-
-    else{                                        // Sentido Reverso
+    //Movimentação em Ré
+    else{
       /*Serial.println("BIT: "); 
-      Serial.println(data.motor2, DEC);*/ //analógico esquerdo
-      int motor_speed_2 = map(data.motor2,156,255,0,99);
-      /*Serial.println("LEFT MOTOR REVERSE: ");*/
+       Serial.println(RSYVal, DEC);*/      //analógico direito
+      int motor_speed = map(data.RSYVal,156,255,0,99);
+      int motor_speed_2 = map(data.RSYVal,156,255,0,99);
+      /*Serial.println("RIGHT MOTOR REVERSE: ");*/
+      Serial.println(motor_speed, DEC);
+      Serial.println("\t");
       Serial.println(motor_speed_2, DEC);
-      digitalWrite(led2, LOW);    
-      byte brightness_2;     
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
+      byte brightness;     
+      brightness = motor_speed;
+      brightness_2 = motor_speed_2;
+      analogWrite(led1, brightness);
+      analogWrite(led2, brightness_2);
+      /*int reversePWM = motor_speed;
+       reversePWM_2 = motor_speed_2
+       analogWrite(LPWM_Output, 0);
+       analogWrite(LPWM_Output_2, 0);
+       analogWrite(RPWM_Output, reversePWM);
+       analogWrite(RPWM_Output_2, reversePWM_2);*/
+    }
+
+
+    //Movimentação para Esquerda
+    if(data.RSXVal < 100){            
+      /*Serial.println("BIT: ");
+       Serial.println(RSXVal, DEC);*/
+      int motor_speed = 0;
+      int motor_speed_2 = map(data.RSXVal,0,99,99,0);
+      Serial.println(motor_speed, DEC);
+      Serial.println("\t");
+      Serial.println(motor_speed_2, DEC);
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
+      byte brightness_2;
       brightness_2 = motor_speed_2;
       analogWrite(led2, brightness_2);
-
-      /*int reversePWM2 = motor_speed_2;
-      analogWrite(LPWM2_Output, 0);
-      analogWrite(RPWM2_Output, reversePWM2);*/              
+      /*int forwardPWM_2 = motor_speed_2;
+       analogWrite(LPWM_Output_2, forwardPWM_2);
+       analogWrite(RPWM_Output_2, 0);*/
+    }
+    //Parado
+    else if(data.RSXVal >= 100 && data.RSXVal < 156){
+      motor_speed = 0;
+      motor_speed_2 = 0;
+      Serial.println(motor_speed, DEC);
+      Serial.println("\t");
+      Serial.println(motor_speed_2, DEC);
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
+      //    Serial.println("Analogico na posicao Neutra!!");
+    }
+    //Movimentação para Direita
+    else{                                        
+      /*Serial.println("BIT: "); 
+       Serial.println(RSXVal, DEC);*/      //analógico direito
+      int motor_speed = map(data.RSXVal,156,255,0,99);
+      int motor_speed_2 = 0;
+      Serial.println(motor_speed, DEC);
+      Serial.println("\t");
+      Serial.println(motor_speed_2, DEC);
+      digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
+      byte brightness;     
+      brightness = motor_speed;
+      analogWrite(led1, brightness);
+      /*int reversePWM = motor_speed;
+       analogWrite(LPWM_Output, 0);
+       analogWrite(RPWM_Output, reversePWM);*/
     }
 
     //motor3
-    if(data.motor3 > 0 ) 
-    {
-    Serial.println(data.motor3, DEC);
-    digitalWrite(led3, HIGH);    
+    if(data.motor3 < 100){       // Sentido Direto            
+      /*Serial.println("BIT: ");
+       Serial.println(LSYVal, DEC);*/
+      int motor_speed_3 = map(data.motor3,0,99,99,0);
+      /*Serial.println("VERTICAL FORWARD: ");*/
+      Serial.println(motor_speed_3, DEC);
+      digitalWrite(led3, LOW);    
+      byte brightness_3;     
+      brightness_3 = motor_speed_3;
+      analogWrite(led3, brightness_3);
+      /*int forwardPWM = motor_speed_3;
+       analogWrite(LPWM_Output, forwardPWM);
+       analogWrite(RPWM_Output, 0);*/
     }
-    else
-    {
-    Serial.println(data.motor3, DEC);
-    digitalWrite(led3, LOW);
+
+    else if(data.motor3 >= 100 && data.motor3 < 156){
+      motor_speed_3 = 0;
+      Serial.println(motor_speed_3, DEC);
+      digitalWrite(led3, LOW);
+      //    Serial.println("Analogico na posicao Neutra!!");
     }
-    
+
+    else{                                        // Sentido Reverso
+      /*Serial.println("BIT: "); 
+       Serial.println(RSYVal, DEC);*/      //analógico direito
+      int motor_speed_3 = map(data.motor3,156,255,0,99);
+      /*Serial.println("RIGHT MOTOR REVERSE: ");*/
+      Serial.println(motor_speed_3, DEC);
+      digitalWrite(led3, LOW);    
+      byte brightness_3;     
+      brightness_3 = motor_speed_3;
+      analogWrite(led3, brightness_3);
+      /*int reversePWM = motor_speed_3;
+       analogWrite(LPWM_Output, 0);
+       analogWrite(RPWM_Output, reversePWM);*/
+    }
+
   }
+    //*************************************************************    
 
   if(millis() - lastComCheck > 1000)
   {
@@ -193,11 +245,11 @@ void loop()
 inline void rovSafe()
 {
   /*digitalWrite(LPWM_Output, LOW);
-  digitalWrite(RPWM_Output, LOW);
-  digitalWrite(LPWM2_Output, LOW);
-  digitalWrite(RPWM2_Output, LOW);
-  digitalWrite(LPWM3_Output, LOW);
-  digitalWrite(RPWM3_Output, LOW);*/
+   digitalWrite(RPWM_Output, LOW);
+   digitalWrite(LPWM2_Output, LOW);
+   digitalWrite(RPWM2_Output, LOW);
+   digitalWrite(LPWM3_Output, LOW);
+   digitalWrite(RPWM3_Output, LOW);*/
 }
 //--------------------------------------
 
@@ -269,6 +321,7 @@ inline void outputValues()
  }
  } 
  */
+
 
 
 

@@ -17,8 +17,7 @@ int neutral = 128;
 int verticals = 0;
 int LSYVal = 0;
 int RSYVal = 0;
-int TRIANGLE = 0;
-int CROSS = 0;
+int RSXVal = 0;
 boolean enabled = false;
 
 //BWD---------------------------------
@@ -29,8 +28,8 @@ int sendInterval = 75;
 //rs422 com setup---------------------
 struct rovData
 {
-  int motor1;
-  int motor2;
+  int RSYVal;
+  int RSXVal;
   int motor3;
   int relay1;
   int relay2;
@@ -77,24 +76,10 @@ void loop()
       Serial.println("disabled");
       enabled = false;
     }
-              
-    if(ps2x.ButtonPressed(PSB_TRIANGLE))
-    {
-      verticals = TRIANGLE;
-    }         
-    if(ps2x.ButtonPressed(PSB_CROSS))
-    {
-      verticals = CROSS;
-    }
-    if(ps2x.ButtonReleased(PSB_TRIANGLE) || ps2x.ButtonReleased(PSB_CROSS))
-    {
-      verticals = 0;
-    }
-        
+                      
     LSYVal = ps2x.Analog(PSS_LY);
     RSYVal = ps2x.Analog(PSS_RY);
-    TRIANGLE = ps2x.Analog(PSB_TRIANGLE);
-    CROSS = ps2x.Analog(PSB_CROSS);
+    RSXVal = ps2x.Analog(PSS_RX);
 
     motorCalc();   
  }      
@@ -102,9 +87,9 @@ void loop()
 //-----------------------------------------
 inline void motorCalc()
 {
-    data.motor1 = RSYVal;
-    data.motor2 = LSYVal;  
-    data.motor3 = verticals;
+    data.RSYVal = RSYVal;
+    data.RSXVal = RSXVal;  
+    data.motor3 = LSYVal;
     
     //debug
     /*
